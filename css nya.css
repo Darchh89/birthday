@@ -121,6 +121,7 @@ body {
 /* === COVER === */
 .cover-content {
   text-align: center;
+  margin: auto 0;
   animation: fadeUp 0.8s ease forwards;
 }
 
