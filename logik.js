@@ -267,8 +267,8 @@ document.getElementById('btn-next3').addEventListener('click', () => {
 document.getElementById('btn-yes').addEventListener('click', (e) => {
   burstConfetti(e.clientX, e.clientY, 60);
   setTimeout(() => {
-    goTo(pages.quiz, pages.relationQuiz);
-    startKuis();
+    goTo(pages.quiz, pages.reasons);
+    revealReasons();
   }, 800);
 });
 
@@ -289,19 +289,8 @@ function revealReasons() {
 }
 
 document.getElementById('btn-next4').addEventListener('click', () => {
-  goTo(pages.reasons, pages.final);
-  // big confetti shower on final page
-  setTimeout(() => {
-    for (let i = 0; i < 3; i++) {
-      setTimeout(() => {
-        burstConfetti(
-          Math.random() * window.innerWidth,
-          Math.random() * window.innerHeight * 0.3,
-          40
-        );
-      }, i * 400);
-    }
-  }, 500);
+  goTo(pages.reasons, pages.relationQuiz);
+  startKuis();
 });
 
 // Tombol "Enggak" menghindar
@@ -421,8 +410,19 @@ function showKuisResult() {
     nextBtn.className = 'btn-main';
     nextBtn.textContent = 'Lanjut →';
     nextBtn.addEventListener('click', () => {
-      goTo(pages.relationQuiz, pages.reasons);
-      revealReasons(); // reveal reasons list
+      goTo(pages.relationQuiz, pages.final);
+      // big confetti shower on final page
+      setTimeout(() => {
+        for (let i = 0; i < 3; i++) {
+          setTimeout(() => {
+            burstConfetti(
+              Math.random() * window.innerWidth,
+              Math.random() * window.innerHeight * 0.3,
+              40
+            );
+          }, i * 400);
+        }
+      }, 500);
     });
     optionsContainer.appendChild(nextBtn);
   } else {
