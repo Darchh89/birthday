@@ -10,6 +10,25 @@ const CONFIG = {
   tanggal: "10 Juli 2026",             // Ganti tanggal ultahnya
   nomorWA: "628123456789",             // Ganti nomor WA kamu (format 628xxx)
 
+  // Kuis Hubungan Kita (bisa diedit sesuka hati)
+  kuis: [
+    {
+      tanya: "Siapa yang paling sering ngambek? 🥺",
+      opsi: ["Aku (tapi boong) 🥺", "Kamu 😜", "Dua-duanya 🤪"],
+      jawaban: 1 // Kamu
+    },
+    {
+      tanya: "Apa makanan favorit aku? 🍛",
+      opsi: ["Seblak Pedes 🍜", "Semua yang gratisan 😂", "Ayam Geprek 🍗"],
+      jawaban: 1 // Semua yang gratisan
+    },
+    {
+      tanya: "Tanggal berapa kita jadian? 📅",
+      opsi: ["10 Oktober", "12 Desember", "Setiap hari kan sayang terus 🥰"],
+      jawaban: 2 // Setiap hari kan sayang terus
+    }
+  ],
+
   // Isi surat — tulis sesuka hati kamu
   surat: `Hai sayang... 💕
 
@@ -34,6 +53,7 @@ const pages = {
   letter: document.getElementById('letter'),
   memories: document.getElementById('memories'),
   quiz: document.getElementById('quiz'),
+  relationQuiz: document.getElementById('relation-quiz'),
   reasons: document.getElementById('reasons'),
   bouquet: document.getElementById('bouquet'),
   final: document.getElementById('final')
@@ -247,9 +267,8 @@ document.getElementById('btn-next3').addEventListener('click', () => {
 document.getElementById('btn-yes').addEventListener('click', (e) => {
   burstConfetti(e.clientX, e.clientY, 60);
   setTimeout(() => {
-    goTo(pages.quiz, pages.reasons);
-    // reveal reasons one by one
-    revealReasons();
+    goTo(pages.quiz, pages.relationQuiz);
+    startKuis();
   }, 800);
 });
 
@@ -309,3 +328,112 @@ btnNo.addEventListener('click', (e) => {
   e.preventDefault();
   dodgeButton();
 });
+
+// --- STAGE 5.5: Relationship Quiz Logic ---
+let currentKuisIndex = 0;
+let kuisScore = 0;
+
+function startKuis() {
+  currentKuisIndex = 0;
+  kuisScore = 0;
+  document.getElementById('rq-emoji').textContent = "🤔";
+  document.getElementById('rq-title').textContent = "Kuis Hubungan Kita 💕";
+  loadKuisQuestion();
+}
+
+function loadKuisQuestion() {
+  const kuisData = CONFIG.kuis[currentKuisIndex];
+  const questionEl = document.getElementById('rq-question');
+  const optionsContainer = document.getElementById('rq-options');
+  const progressEl = document.getElementById('rq-progress');
+
+  // clear options
+  optionsContainer.innerHTML = '';
+
+  // set question
+  questionEl.textContent = kuisData.tanya;
+
+  // set progress
+  progressEl.textContent = `Pertanyaan ${currentKuisIndex + 1} dari ${CONFIG.kuis.length}`;
+
+  // render options
+  kuisData.opsi.forEach((opsi, index) => {
+    const btn = document.createElement('button');
+    btn.className = 'rq-option-btn';
+    btn.textContent = opsi;
+    btn.addEventListener('click', () => handleKuisAnswer(btn, index));
+    optionsContainer.appendChild(btn);
+  });
+}
+
+function handleKuisAnswer(btn, selectedIndex) {
+  const kuisData = CONFIG.kuis[currentKuisIndex];
+  const allBtns = document.querySelectorAll('.rq-option-btn');
+
+  // disable all options
+  allBtns.forEach(b => b.disabled = true);
+
+  if (selectedIndex === kuisData.jawaban) {
+    btn.classList.add('correct');
+    kuisScore++;
+  } else {
+    btn.classList.add('incorrect');
+    // highlight correct answer in green
+    allBtns[kuisData.jawaban].classList.add('correct');
+  }
+
+  // wait 1.5s then go to next question or show result
+  setTimeout(() => {
+    currentKuisIndex++;
+    if (currentKuisIndex < CONFIG.kuis.length) {
+      loadKuisQuestion();
+    } else {
+      showKuisResult();
+    }
+  }, 1500);
+}
+
+function showKuisResult() {
+  const questionEl = document.getElementById('rq-question');
+  const optionsContainer = document.getElementById('rq-options');
+  const progressEl = document.getElementById('rq-progress');
+
+  optionsContainer.innerHTML = '';
+  progressEl.textContent = '';
+
+  if (kuisScore === CONFIG.kuis.length) {
+    document.getElementById('rq-emoji').textContent = "🎉🏆";
+    document.getElementById('rq-title').textContent = "Skor Kamu Sempurna! 💯";
+    questionEl.textContent = "Luar biasa! Kamu ingat semua detail hubungan kita. Aku makin sayang sama kamu! 🥰💕";
+
+    // burst massive confetti
+    for (let i = 0; i < 4; i++) {
+      setTimeout(() => {
+        burstConfetti(
+          Math.random() * window.innerWidth,
+          Math.random() * window.innerHeight * 0.3,
+          50
+        );
+      }, i * 300);
+    }
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'btn-main';
+    nextBtn.textContent = 'Lanjut →';
+    nextBtn.addEventListener('click', () => {
+      goTo(pages.relationQuiz, pages.reasons);
+      revealReasons(); // reveal reasons list
+    });
+    optionsContainer.appendChild(nextBtn);
+  } else {
+    document.getElementById('rq-emoji').textContent = "🥺";
+    document.getElementById('rq-title').textContent = "Yah, Coba Lagi Yuk...";
+    questionEl.textContent = `Skor kamu: ${kuisScore} dari ${CONFIG.kuis.length}. Ada jawaban yang kurang pas nih. Coba ulangi kuis biar dapet skor 100! 🤍`;
+
+    const retryBtn = document.createElement('button');
+    retryBtn.className = 'btn-main';
+    retryBtn.textContent = 'Ulangi Kuis 🔄';
+    retryBtn.addEventListener('click', startKuis);
+    optionsContainer.appendChild(retryBtn);
+  }
+}
