@@ -480,8 +480,18 @@ setTimeout(() => {
 // --- Polaroid Stack Interactive Cycling ---
 const cards = document.querySelectorAll('.photo-card');
 
+// --- Lightbox / Photo Inspector Elements ---
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxCaption = document.getElementById('lightbox-caption');
+const lightboxClose = document.querySelector('.lightbox-close');
+
 cards.forEach(card => {
-  card.addEventListener('click', () => {
+  // 1. Click on the card (excl. zoom button) to cycle the deck
+  card.addEventListener('click', (e) => {
+    // If the click is on the zoom button or inside it, do not cycle the deck
+    if (e.target.closest('.photo-zoom-btn')) return;
+
     // Only cycle if this card is currently the top card AND not already animating
     if (!card.classList.contains('state-top') || card.classList.contains('swipe')) return;
     
@@ -508,7 +518,40 @@ cards.forEach(card => {
       card.classList.remove('swipe');
     }, 450);
   });
+
+  // 2. Click on the Zoom Button to Inspect the Photo
+  const zoomBtn = card.querySelector('.photo-zoom-btn');
+  if (zoomBtn) {
+    zoomBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // prevent card click
+      
+      const img = card.querySelector('img');
+      const caption = card.querySelector('.photo-caption');
+      
+      if (img && lightbox && lightboxImg && lightboxCaption) {
+        lightboxImg.src = img.src;
+        lightboxCaption.innerHTML = caption ? caption.innerHTML : '';
+        lightbox.style.display = 'block';
+      }
+    });
+  }
 });
+
+// Close Lightbox on close button click
+if (lightboxClose) {
+  lightboxClose.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+  });
+}
+
+// Close Lightbox when clicking anywhere outside the image
+if (lightbox) {
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target === lightboxClose) {
+      lightbox.style.display = 'none';
+    }
+  });
+}
 
 // --- Trigger Polaroid Stagger Entrance ---
 function revealMemories() {

@@ -234,24 +234,34 @@
       <div class="photo-grid">
         <div class="photo-card state-top pc-1">
           <div class="photo-tape"></div>
-          <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=400&h=400&fit=crop" alt="memory">
+          <div class="photo-zoom-btn">🔍</div>
+          <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=800&h=800&fit=crop" alt="memory">
           <p class="photo-caption">Our very first sunset together <span class="photo-flower">🌸</span></p>
         </div>
         <div class="photo-card state-mid pc-2">
           <div class="photo-tape"></div>
-          <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=400&fit=crop" alt="memory">
+          <div class="photo-zoom-btn">🔍</div>
+          <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&h=800&fit=crop" alt="memory">
           <p class="photo-caption">Our favourite café in the corner of the city <span class="photo-flower">🌸</span></p>
         </div>
         <div class="photo-card state-bot pc-3">
           <div class="photo-tape"></div>
-          <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=400&fit=crop" alt="memory">
+          <div class="photo-zoom-btn">🔍</div>
+          <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800&h=800&fit=crop" alt="memory">
           <p class="photo-caption">First time at the beach, just the two of us <span class="photo-flower">🌸</span></p>
         </div>
       </div>
-      <p class="photo-tip">💡 tap foto untuk melihat foto berikutnya</p>
+      <p class="photo-tip">💡 tap foto untuk ganti, atau klik 🔍 untuk perbesar</p>
       <button id="btn-next3" class="btn-main">next →</button>
     </div>
   </section>
+
+  <!-- LIGHTBOX / PHOTO INSPECTOR MODAL -->
+  <div id="lightbox" class="lightbox-modal">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" alt="Zoomed Memory">
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+  </div>
 
   <!-- STAGE 5: Quiz -->
   <section id="quiz" class="page">

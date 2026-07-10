@@ -574,6 +574,29 @@ body {
   z-index: 10;
 }
 
+.photo-zoom-btn {
+  position: absolute;
+  top: 32px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.95rem;
+  z-index: 15;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.photo-zoom-btn:hover {
+  transform: scale(1.15);
+  background: #fff;
+}
+
 .photo-card img {
   width: 100%;
   height: 190px;
@@ -604,6 +627,74 @@ body {
 @keyframes floatFlower {
   from { transform: translateY(0) rotate(0); }
   to { transform: translateY(-2px) rotate(10deg); }
+}
+
+/* === LIGHTBOX / PHOTO INSPECTOR MODAL === */
+.lightbox-modal {
+  display: none;
+  position: fixed;
+  z-index: 10000; /* above everything */
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(15, 4, 8, 0.96); /* darker burgundy black backdrop */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.lightbox-content {
+  margin: auto;
+  display: block;
+  width: 85%;
+  max-width: 420px;
+  border-radius: 12px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
+  animation: zoomEffect 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 4px solid #fdfbf7; /* matching polaroid frame */
+}
+
+@keyframes zoomEffect {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  z-index: 10002;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.lightbox-close:hover {
+  color: #f0a0b0;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.lightbox-caption {
+  margin: 15px auto;
+  width: 80%;
+  max-width: 420px;
+  text-align: center;
+  color: #f0a0b0;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* === QUIZ === */
