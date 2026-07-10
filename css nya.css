@@ -364,25 +364,25 @@ body {
   padding: 24px 12px 20px 12px; /* added top padding to separate tape from image */
   border: 1px solid rgba(0, 0, 0, 0.05); /* clean boundary */
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28); /* slightly softer shadows */
-  animation: fadeUp 0.6s ease forwards;
+  animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
   transition: transform 0.3s ease;
 }
 
 .pc-1 {
   transform: rotate(-2deg);
-  animation-delay: 0.1s;
+  animation-delay: 0.3s;
 }
 
 .pc-2 {
   transform: rotate(1.5deg);
-  animation-delay: 0.3s;
+  animation-delay: 0.9s;
   z-index: 2;
 }
 
 .pc-3 {
   transform: rotate(-1.5deg);
-  animation-delay: 0.5s;
+  animation-delay: 1.5s;
 }
 
 .photo-tape {
