@@ -548,7 +548,7 @@ function resetCandle() {
   flame.classList.remove('extinguished');
   smoke.classList.remove('active');
   smoke.classList.add('hidden');
-  cakeInstruction.textContent = "Pejamkan mata, make a wish dalam hati... 🤫";
+  cakeInstruction.innerHTML = 'Pejamkan mata, make a wish dalam hati... 🤫<br><span class="cake-hint">👇 tap/sentuh api lilin untuk meniupnya!</span>';
   btnNextCake.classList.remove('show');
 }
 
@@ -575,7 +575,7 @@ function blowCandle() {
   // Success message
   cakeInstruction.style.opacity = '0';
   setTimeout(() => {
-    cakeInstruction.textContent = "Yeeayy! Semoga semua keinginanmu dikabulkan ya sayang... 🤍";
+    cakeInstruction.innerHTML = "Yeeayy! Semoga semua keinginanmu dikabulkan ya sayang... 🤍";
     cakeInstruction.style.opacity = '1';
   }, 300);
   

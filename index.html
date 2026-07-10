@@ -281,30 +281,53 @@
   <section id="blow-cake" class="page">
     <div class="page-inner">
       <h2 class="section-title">Tiup Lilinnya Yuk! 🎂</h2>
-      <p class="cake-sub" id="cake-instruction">Pejamkan mata, make a wish dalam hati... 🤫</p>
+      <p class="cake-sub" id="cake-instruction">
+        Pejamkan mata, make a wish dalam hati... 🤫
+        <span class="cake-hint">👇 tap/sentuh api lilin untuk meniupnya!</span>
+      </p>
       
       <div class="cake-container" id="cake-container">
         <svg viewBox="0 0 200 200" class="cake-svg">
+          <!-- Plate Stand Pedestal -->
+          <path d="M85,162 L115,162 L110,175 L90,175 Z" fill="#ccc" />
           <!-- Plate -->
-          <ellipse cx="100" cy="160" rx="80" ry="12" fill="#eee" />
-          <!-- Cake Base Layer -->
-          <path d="M40,110 L160,110 L160,155 A60,10 0 0,1 40,155 Z" fill="#e07a5f" />
-          <!-- Top Frosting -->
-          <path d="M40,110 A60,10 0 0,1 160,110 L160,120 Q150,125 140,120 Q130,115 120,120 Q110,125 100,120 Q90,115 80,120 Q70,125 60,120 Q50,115 40,120 Z" fill="#f4f1de" />
-          <!-- Cream decoration dots -->
-          <circle cx="50" cy="108" r="4" fill="#e07a5f" />
-          <circle cx="75" cy="109" r="4" fill="#e07a5f" />
-          <circle cx="100" cy="110" r="4" fill="#e07a5f" />
-          <circle cx="125" cy="109" r="4" fill="#e07a5f" />
-          <circle cx="150" cy="108" r="4" fill="#e07a5f" />
+          <ellipse cx="100" cy="162" rx="75" ry="10" fill="#e5e5e5" stroke="#d5d5d5" stroke-width="0.8" />
+          
+          <!-- Cake Base Layer (Chocolate) -->
+          <path d="M50,110 L150,110 L150,154 A50,8 0 0,1 50,154 Z" fill="#4f2f1d" />
+          
+          <!-- Strawberry Cream Layer in the middle -->
+          <path d="M50,132 L150,132 L150,138 A50,2 0 0,1 50,138 Z" fill="#ffb5a7" />
+          
+          <!-- Top Dripping Chocolate Frosting -->
+          <path d="M50,110 A50,6 0 0,1 150,110 L150,122 Q142,128 135,122 Q127,116 120,122 Q112,128 105,122 Q97,116 90,122 Q82,128 75,122 Q67,116 60,122 L50,116 Z" fill="#2b170c" />
+          
+          <!-- Sprinkles on Top -->
+          <rect x="65" y="114" width="2" height="5" rx="0.8" fill="#ffd166" transform="rotate(30 65 114)" />
+          <rect x="85" y="112" width="2" height="5" rx="0.8" fill="#06d6a0" transform="rotate(-20 85 112)" />
+          <rect x="115" y="113" width="2" height="5" rx="0.8" fill="#ef476f" transform="rotate(45 115 113)" />
+          <rect x="135" y="115" width="2" height="5" rx="0.8" fill="#ffd166" transform="rotate(-15 135 115)" />
+          <circle cx="100" cy="113" r="1.5" fill="#fff" />
+          <circle cx="75" cy="116" r="1.5" fill="#ef476f" />
+          <circle cx="125" cy="116" r="1.5" fill="#06d6a0" />
+          
+          <!-- Left Cherry -->
+          <circle cx="70" cy="106" r="6" fill="#d00000" />
+          <path d="M70,106 Q73,98 68,92" stroke="#495057" stroke-width="1" fill="none" />
+          
+          <!-- Right Cherry -->
+          <circle cx="130" cy="106" r="6" fill="#d00000" />
+          <path d="M130,106 Q133,98 128,92" stroke="#495057" stroke-width="1" fill="none" />
+          
           <!-- Candle -->
-          <rect x="97" y="55" width="6" height="35" fill="#f2cc8f" rx="1" />
+          <rect x="97" y="65" width="6" height="42" fill="#ffd166" rx="1" />
           <!-- Stripes on candle -->
-          <path d="M97,60 L103,63 M97,70 L103,73 M97,80 L103,83" stroke="#e07a5f" stroke-width="1.5" />
+          <path d="M97,72 L103,75 M97,82 L103,85 M97,92 L103,95" stroke="#ef476f" stroke-width="1.8" />
+          
           <!-- Flame -->
-          <path id="candle-flame" class="flame" d="M100,32 Q105,42 100,52 Q95,42 100,32" fill="#ffb703" cursor="pointer" />
+          <path id="candle-flame" class="flame" d="M100,45 Q105,55 100,65 Q95,55 100,45" fill="#ffb703" cursor="pointer" />
           <!-- Smoke (hidden initially) -->
-          <path id="candle-smoke" class="smoke hidden" d="M100,48 Q97,38 103,28 Q100,23 100,18" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" />
+          <path id="candle-smoke" class="smoke hidden" d="M100,58 Q97,48 103,38 Q100,33 100,28" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" />
         </svg>
       </div>
       
