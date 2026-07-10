@@ -164,113 +164,192 @@ body {
   margin-bottom: 8px;
 }
 
-/* Gift Box container styling */
-.gift-box {
+/* Gift Box container styling (3D Scene) */
+.gift-box-scene {
   position: relative;
-  width: 100px;
-  height: 100px;
-  margin: 10px auto 30px auto;
+  width: 140px;
+  height: 140px;
+  margin: 10px auto 40px auto;
+  perspective: 800px;
   cursor: pointer;
   z-index: 10;
-  transition: all 0.3s ease;
-  animation: hoverFloat 3s ease-in-out infinite alternate;
+  animation: float3D 3s ease-in-out infinite alternate;
 }
 
-@keyframes hoverFloat {
+@keyframes float3D {
   0% { transform: translateY(0); }
-  100% { transform: translateY(-8px); }
+  100% { transform: translateY(-10px); }
 }
 
-.gift-box:hover {
-  transform: scale(1.05);
+.gift-box-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(-22deg) rotateY(45deg);
+  transition: transform 0.5s ease;
 }
 
-/* Lid */
-.gift-lid {
+/* Wobble / Shake effect on hover */
+.gift-box-scene:hover .gift-box-3d {
+  animation: wobble3d 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes wobble3d {
+  0% { transform: rotateX(-22deg) rotateY(35deg) scale3d(1.04, 1.04, 1.04); }
+  100% { transform: rotateX(-18deg) rotateY(55deg) scale3d(1.04, 1.04, 1.04); }
+}
+
+/* General face settings */
+.body-face, .lid-face {
   position: absolute;
-  top: 0;
-  left: -5px;
-  width: 110px;
-  height: 25px;
-  background: #e03050; /* hot rose red */
-  border-radius: 4px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-  z-index: 12;
-  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-sizing: border-box;
+  backface-visibility: visible;
 }
 
-/* Bow on the lid */
-.gift-bow {
+/* Box Body size: 100px wide, 85px high, 100px deep */
+.box-body {
   position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 22px;
-  height: 12px;
-  background: #e03050;
-  border-radius: 50% 50% 0 0;
+  width: 100px;
+  height: 85px;
+  top: 30px;
+  left: 20px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
 }
-.gift-bow::before,
-.gift-bow::after {
+
+.body-face {
+  position: absolute;
+  background: rgba(253, 251, 247, 0.95); /* cream */
+  border: 1.5px solid rgba(61, 13, 28, 0.1);
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.06);
+}
+
+.body-front, .body-back {
+  width: 100px;
+  height: 85px;
+}
+.body-left, .body-right {
+  width: 100px;
+  height: 85px;
+}
+.body-bottom {
+  width: 100px;
+  height: 100px;
+}
+
+/* Position faces in 3D */
+.body-front  { transform: rotateY(  0deg) translateZ(50px); }
+.body-back   { transform: rotateY(180deg) translateZ(50px); }
+.body-left   { transform: rotateY(-90deg) translateZ(50px); }
+.body-right  { transform: rotateY( 90deg) translateZ(50px); }
+.body-bottom { transform: translateY(35px) rotateX(90deg); background: #eee; }
+
+/* Ribbon details on body faces */
+.body-face::before {
   content: '';
   position: absolute;
-  width: 18px;
-  height: 18px;
-  background: #e03050;
-  border-radius: 50%;
-  top: -6px;
+  background: #a8203c; /* wine red ribbon */
+  box-shadow: 0 0 5px rgba(0,0,0,0.08);
 }
-.gift-bow::before { left: -10px; transform: rotate(-25deg); }
-.gift-bow::after { right: -10px; transform: rotate(25deg); }
-
-/* Box Body */
-.gift-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100px;
-  height: 80px;
-  background: #fbf9f3; /* off-white/cream box body */
-  border-radius: 0 0 6px 6px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-  z-index: 11;
-  overflow: hidden;
-  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1);
-}
-
-/* Vertical and horizontal ribbons crossing */
-.gift-ribbon-v {
-  position: absolute;
+.body-front::before, .body-back::before, .body-left::before, .body-right::before {
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 41px;
   width: 18px;
   height: 100%;
-  background: #e03050;
 }
-.gift-ribbon-h {
+
+/* Box Lid size: 106px wide, 20px high, 106px deep */
+.box-lid {
   position: absolute;
-  top: 50%;
+  width: 106px;
+  height: 20px;
+  top: 18px;
+  left: 17px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+  z-index: 10;
+}
+
+.lid-face {
+  position: absolute;
+  background: #a8203c; /* dark wine red lid */
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+.lid-front, .lid-back {
+  width: 106px;
+  height: 20px;
+}
+.lid-left, .lid-right {
+  width: 106px;
+  height: 20px;
+}
+.lid-top {
+  width: 106px;
+  height: 106px;
+}
+
+.lid-front { transform: rotateY(  0deg) translateZ(53px); }
+.lid-back  { transform: rotateY(180deg) translateZ(53px); }
+.lid-left  { transform: rotateY(-90deg) translateZ(53px); }
+.lid-right { transform: rotateY( 90deg) translateZ(53px); }
+.lid-top   { transform: translateY(-53px) rotateX(90deg); }
+
+/* Ribbon details on Lid top */
+.lid-top::before, .lid-top::after {
+  content: '';
+  position: absolute;
+  background: #ffd166; /* gold cross ribbon on lid */
+  box-shadow: 0 0 4px rgba(0,0,0,0.15);
+}
+.lid-top::before {
+  top: 0;
+  left: 44px;
+  width: 18px;
+  height: 100%;
+}
+.lid-top::after {
+  top: 44px;
   left: 0;
-  transform: translateY(-50%);
   width: 100%;
   height: 18px;
-  background: #e03050;
+}
+
+/* Ribbons on lid sides */
+.lid-front::before, .lid-back::before, .lid-left::before, .lid-right::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 44px;
+  width: 18px;
+  height: 100%;
+  background: #ffd166;
+}
+
+/* Ribbon Bow on Lid top center */
+.lid-bow {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.2rem;
+  z-index: 15;
+  text-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 /* Open Animation trigger states */
-.gift-box.open {
-  animation: none; /* stop floating animation */
+.gift-box-scene.open {
+  animation: none; /* stop floating */
 }
-.gift-box.open .gift-lid {
-  transform: translateY(-120px) rotate(-35deg) scale(0.85);
+.gift-box-scene.open .box-lid {
+  transform: translateY(-160px) rotateX(-45deg) rotateY(60deg) scale(0.8);
   opacity: 0;
 }
-
-.gift-box.open .gift-container {
-  transform: translateY(30px) scale(0.9);
+.gift-box-scene.open .box-body {
+  transform: translateY(80px) rotateX(15deg) scale(0.75);
   opacity: 0;
-  box-shadow: none;
 }
 
 #btn-open {
