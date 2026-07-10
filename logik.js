@@ -140,67 +140,74 @@ class Heart {
   }
 }
 
-for (let i = 0; i < 25; i++) hearts.push(new Heart());
+const isMobile = window.innerWidth <= 600;
+const heartCount = isMobile ? 8 : 18;
+for (let i = 0; i < heartCount; i++) hearts.push(new Heart());
 
-function animateHearts() {
+let lastFrame = 0;
+const frameInterval = isMobile ? 40 : 25; // ~25fps mobile, ~40fps desktop
+
+// --- Unified Canvas Animation Loop ---
+function animateCanvas(timestamp) {
+  requestAnimationFrame(animateCanvas);
+  
+  if (timestamp - lastFrame < frameInterval) return;
+  lastFrame = timestamp;
+  
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  hearts.forEach(h => { h.update(); h.draw(); });
-  requestAnimationFrame(animateHearts);
+  
+  // 1. Draw background hearts
+  hearts.forEach(h => {
+    h.update();
+    h.draw();
+  });
+  
+  // 2. Draw confetti (if any)
+  if (confetti.length > 0) {
+    confetti = confetti.filter(c => {
+      c.vy += c.gravity;
+      c.x += c.vx;
+      c.y += c.vy;
+      c.vx *= 0.98;
+      c.opacity -= 0.015;
+      
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, c.opacity);
+      ctx.fillStyle = c.color;
+      ctx.beginPath();
+      const s = c.size;
+      ctx.moveTo(c.x, c.y + s * 0.3);
+      ctx.bezierCurveTo(c.x, c.y, c.x - s * 0.5, c.y, c.x - s * 0.5, c.y + s * 0.3);
+      ctx.bezierCurveTo(c.x - s * 0.5, c.y + s * 0.6, c.x, c.y + s * 0.8, c.x, c.y + s);
+      ctx.bezierCurveTo(c.x, c.y + s * 0.8, c.x + s * 0.5, c.y + s * 0.6, c.x + s * 0.5, c.y + s * 0.3);
+      ctx.bezierCurveTo(c.x + s * 0.5, c.y, c.x, c.y, c.x, c.y + s * 0.3);
+      ctx.fill();
+      ctx.restore();
+      
+      return c.opacity > 0;
+    });
+  }
 }
-animateHearts();
+animateCanvas(0);
 
 // --- Confetti Burst ---
 let confetti = [];
 function burstConfetti(cx, cy, count) {
   const colors = ['#f0a0b0', '#ffd6e0', '#fff', '#ffb3c6', '#c9184a'];
-  for (let i = 0; i < count; i++) {
+  const actualCount = isMobile ? Math.floor(count * 0.6) : count;
+  
+  for (let i = 0; i < actualCount; i++) {
     const angle = Math.random() * Math.PI * 2;
-    const speed = Math.random() * 6 + 2;
+    const speed = Math.random() * 5 + 2;
     confetti.push({
       x: cx, y: cy,
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
-      size: Math.random() * 6 + 3,
+      size: Math.random() * 5 + 3,
       color: colors[Math.floor(Math.random() * colors.length)],
       opacity: 1,
       gravity: 0.12
     });
-  }
-  if (confetti.length === count) animateConfetti();
-}
-
-function animateConfetti() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
-  // draw hearts too
-  hearts.forEach(h => { h.update(); h.draw(); });
-  
-  confetti = confetti.filter(c => {
-    c.vy += c.gravity;
-    c.x += c.vx;
-    c.y += c.vy;
-    c.vx *= 0.98;
-    c.opacity -= 0.012;
-    
-    ctx.save();
-    ctx.globalAlpha = Math.max(0, c.opacity);
-    ctx.fillStyle = c.color;
-    ctx.beginPath();
-    // draw heart shape for confetti
-    const s = c.size;
-    ctx.moveTo(c.x, c.y + s * 0.3);
-    ctx.bezierCurveTo(c.x, c.y, c.x - s * 0.5, c.y, c.x - s * 0.5, c.y + s * 0.3);
-    ctx.bezierCurveTo(c.x - s * 0.5, c.y + s * 0.6, c.x, c.y + s * 0.8, c.x, c.y + s);
-    ctx.bezierCurveTo(c.x, c.y + s * 0.8, c.x + s * 0.5, c.y + s * 0.6, c.x + s * 0.5, c.y + s * 0.3);
-    ctx.bezierCurveTo(c.x + s * 0.5, c.y, c.x, c.y, c.x, c.y + s * 0.3);
-    ctx.fill();
-    ctx.restore();
-    
-    return c.opacity > 0;
-  });
-  
-  if (confetti.length > 0) {
-    requestAnimationFrame(animateConfetti);
   }
 }
 
