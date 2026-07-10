@@ -72,17 +72,27 @@ waLink.href = `https://api.whatsapp.com/send?phone=${CONFIG.nomorWA}&text=${enco
 
 // --- Page Navigation ---
 function goTo(from, to) {
-  from.classList.remove('active');
+  from.classList.add('leaving');
+  to.classList.add('active');
+  
+  // re-trigger animation
+  const inner = to.querySelector('.page-inner');
+  if (inner) {
+    inner.style.animation = 'none';
+    inner.offsetHeight; // force reflow
+    inner.style.animation = '';
+  }
+  const coverInner = to.querySelector('.cover-content');
+  if (coverInner) {
+    coverInner.style.animation = 'none';
+    coverInner.offsetHeight; // force reflow
+    coverInner.style.animation = '';
+  }
+  
   setTimeout(() => {
-    to.classList.add('active');
-    // re-trigger animation
-    const inner = to.querySelector('.page-inner');
-    if (inner) {
-      inner.style.animation = 'none';
-      inner.offsetHeight; // force reflow
-      inner.style.animation = '';
-    }
-  }, 300);
+    from.classList.remove('active');
+    from.classList.remove('leaving');
+  }, 500);
 }
 
 // --- Floating Hearts Particle System ---
