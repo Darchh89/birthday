@@ -447,3 +447,24 @@ function showKuisResult() {
     optionsContainer.appendChild(retryBtn);
   }
 }
+
+// --- Loading Screen Handler ---
+let isPageLoaded = false;
+window.addEventListener('load', () => {
+  isPageLoaded = true;
+});
+
+setTimeout(() => {
+  const checkInterval = setInterval(() => {
+    if (isPageLoaded || document.readyState === 'complete') {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.classList.add('fade-out');
+        clearInterval(checkInterval);
+        setTimeout(() => {
+          loader.style.display = 'none';
+        }, 800);
+      }
+    }
+  }, 100);
+}, 2500);

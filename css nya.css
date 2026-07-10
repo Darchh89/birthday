@@ -645,6 +645,53 @@ body {
   75% { transform: translateX(6px); }
 }
 
+/* === LOADER SCREEN === */
+.loader-wrap {
+  position: fixed;
+  inset: 0;
+  background: #3d0d1c; /* matches body background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* on top of everything */
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+.loader-content {
+  text-align: center;
+}
+
+.loader-flower {
+  font-size: 3.5rem;
+  display: inline-block;
+  animation: spinFlower 2.5s linear infinite;
+}
+
+.loader-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  color: #f0a0b0;
+  margin-top: 20px;
+  letter-spacing: 1.5px;
+  animation: textPulse 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes spinFlower {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes textPulse {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+.loader-wrap.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* === RESPONSIVE === */
 @media (max-width: 480px) {
   .greeting-title { font-size: 2.2rem; }
