@@ -222,7 +222,7 @@ function openGift() {
   setTimeout(() => {
     goTo(pages.cover, pages.greeting);
     typeText(document.getElementById('greeting-name'), CONFIG.nama, 120, () => {
-      document.getElementById('btn-next1').classList.remove('hidden');
+      document.getElementById('btn-next1').classList.add('show');
     });
   }, 1000);
 }
@@ -259,7 +259,7 @@ document.getElementById('btn-next5').addEventListener('click', () => {
   const cursorEl = document.getElementById('cursor');
   typeText(letterEl, CONFIG.surat, 35, () => {
     cursorEl.style.display = 'none';
-    document.getElementById('btn-next2').classList.remove('hidden');
+    document.getElementById('btn-next2').classList.add('show');
   });
 });
 
@@ -291,7 +291,7 @@ function revealReasons() {
       // show next button after last item
       if (i === items.length - 1) {
         setTimeout(() => {
-          document.getElementById('btn-next4').classList.remove('hidden');
+          document.getElementById('btn-next4').classList.add('show');
         }, 500);
       }
     }, (i + 1) * 600);
