@@ -305,3 +305,7 @@ btnNo.addEventListener('touchstart', (e) => {
   e.preventDefault();
   dodgeButton();
 });
+btnNo.addEventListener('click', (e) => {
+  e.preventDefault();
+  dodgeButton();
+});
