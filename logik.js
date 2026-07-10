@@ -179,13 +179,26 @@ function animateConfetti() {
 }
 
 // --- STAGE 1: Cover → Greeting ---
-document.getElementById('btn-open').addEventListener('click', () => {
+const btnOpen = document.getElementById('btn-open');
+const giftBox = document.getElementById('gift-box');
+
+function openGift() {
   audio.play().catch(() => {});
-  goTo(pages.cover, pages.greeting);
-  typeText(document.getElementById('greeting-name'), CONFIG.nama, 120, () => {
-    document.getElementById('btn-next1').classList.remove('hidden');
-  });
-});
+  giftBox.classList.add('open');
+  btnOpen.style.transition = 'opacity 0.5s ease';
+  btnOpen.style.opacity = '0';
+  btnOpen.style.pointerEvents = 'none';
+
+  setTimeout(() => {
+    goTo(pages.cover, pages.greeting);
+    typeText(document.getElementById('greeting-name'), CONFIG.nama, 120, () => {
+      document.getElementById('btn-next1').classList.remove('hidden');
+    });
+  }, 1000);
+}
+
+btnOpen.addEventListener('click', openGift);
+giftBox.addEventListener('click', openGift);
 
 // --- Typing Effect ---
 function typeText(el, text, speed, callback) {
