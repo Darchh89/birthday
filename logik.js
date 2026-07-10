@@ -203,9 +203,14 @@ function typeText(el, text, speed, callback) {
   type();
 }
 
-// --- STAGE 2: Greeting → Letter ---
+// --- STAGE 2: Greeting → Bouquet ---
 document.getElementById('btn-next1').addEventListener('click', () => {
-  goTo(pages.greeting, pages.letter);
+  goTo(pages.greeting, pages.bouquet);
+});
+
+// --- STAGE 7: Bouquet → Letter ---
+document.getElementById('btn-next5').addEventListener('click', () => {
+  goTo(pages.bouquet, pages.letter);
   // start typing letter
   const letterEl = document.getElementById('typed-letter');
   const cursorEl = document.getElementById('cursor');
@@ -252,12 +257,7 @@ function revealReasons() {
 }
 
 document.getElementById('btn-next4').addEventListener('click', () => {
-  goTo(pages.reasons, pages.bouquet);
-});
-
-// --- STAGE 7: Bouquet → Final ---
-document.getElementById('btn-next5').addEventListener('click', () => {
-  goTo(pages.bouquet, pages.final);
+  goTo(pages.reasons, pages.final);
   // big confetti shower on final page
   setTimeout(() => {
     for (let i = 0; i < 3; i++) {
