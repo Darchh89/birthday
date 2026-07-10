@@ -219,6 +219,9 @@ function openGift() {
   btnOpen.style.opacity = '0';
   btnOpen.style.pointerEvents = 'none';
 
+  // Reveal floating music player
+  document.getElementById('music-player').classList.remove('hidden');
+
   setTimeout(() => {
     goTo(pages.cover, pages.greeting);
     typeText(document.getElementById('greeting-name'), CONFIG.nama, 120, () => {
@@ -522,3 +525,23 @@ function revealMemories() {
     card.classList.add('show');
   });
 }
+
+// --- Floating Music Player Logic ---
+const mpToggle = document.getElementById('mp-toggle');
+const mpDisc = document.getElementById('mp-disc');
+const mpIconPlay = document.getElementById('mp-icon-play');
+const mpIconPause = document.getElementById('mp-icon-pause');
+
+mpToggle.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play().catch(() => {});
+    mpDisc.classList.remove('paused');
+    mpIconPlay.classList.add('hidden');
+    mpIconPause.classList.remove('hidden');
+  } else {
+    audio.pause();
+    mpDisc.classList.add('paused');
+    mpIconPlay.classList.remove('hidden');
+    mpIconPause.classList.add('hidden');
+  }
+});
