@@ -55,6 +55,7 @@ const pages = {
   quiz: document.getElementById('quiz'),
   relationQuiz: document.getElementById('relation-quiz'),
   reasons: document.getElementById('reasons'),
+  blowCake: document.getElementById('blow-cake'),
   bouquet: document.getElementById('bouquet'),
   final: document.getElementById('final')
 };
@@ -424,19 +425,8 @@ function showKuisResult() {
     nextBtn.className = 'btn-main';
     nextBtn.textContent = 'Lanjut →';
     nextBtn.addEventListener('click', () => {
-      goTo(pages.relationQuiz, pages.final);
-      // big confetti shower on final page
-      setTimeout(() => {
-        for (let i = 0; i < 3; i++) {
-          setTimeout(() => {
-            burstConfetti(
-              Math.random() * window.innerWidth,
-              Math.random() * window.innerHeight * 0.3,
-              40
-            );
-          }, i * 400);
-        }
-      }, 500);
+      goTo(pages.relationQuiz, pages.blowCake);
+      resetCandle();
     });
     optionsContainer.appendChild(nextBtn);
   } else {
@@ -544,4 +534,70 @@ mpToggle.addEventListener('click', () => {
     mpIconPlay.classList.remove('hidden');
     mpIconPause.classList.add('hidden');
   }
+});
+
+// --- STAGE 5.8: Virtual Blow Cake Logic ---
+const flame = document.getElementById('candle-flame');
+const smoke = document.getElementById('candle-smoke');
+const cakeInstruction = document.getElementById('cake-instruction');
+const btnNextCake = document.getElementById('btn-next-cake');
+let isCandleBlown = false;
+
+function resetCandle() {
+  isCandleBlown = false;
+  flame.classList.remove('extinguished');
+  smoke.classList.remove('active');
+  smoke.classList.add('hidden');
+  cakeInstruction.textContent = "Pejamkan mata, make a wish dalam hati... 🤫";
+  btnNextCake.classList.remove('show');
+}
+
+flame.addEventListener('click', blowCandle);
+flame.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+  blowCandle();
+});
+
+function blowCandle() {
+  if (isCandleBlown) return;
+  isCandleBlown = true;
+  
+  // Extinguish flame
+  flame.classList.add('extinguished');
+  
+  // Trigger smoke puff
+  smoke.classList.remove('hidden');
+  smoke.classList.add('active');
+  
+  // Visual pop / confetti
+  burstConfetti(window.innerWidth / 2, window.innerHeight * 0.45, 30);
+  
+  // Success message
+  cakeInstruction.style.opacity = '0';
+  setTimeout(() => {
+    cakeInstruction.textContent = "Yeeayy! Semoga semua keinginanmu dikabulkan ya sayang... 🤍";
+    cakeInstruction.style.opacity = '1';
+  }, 300);
+  
+  // Reveal next button
+  setTimeout(() => {
+    btnNextCake.classList.add('show');
+  }, 1000);
+}
+
+// Blow Cake next button click
+btnNextCake.addEventListener('click', () => {
+  goTo(pages.blowCake, pages.final);
+  // big confetti shower on final page
+  setTimeout(() => {
+    for (let i = 0; i < 3; i++) {
+      setTimeout(() => {
+        burstConfetti(
+          Math.random() * window.innerWidth,
+          Math.random() * window.innerHeight * 0.3,
+          40
+        );
+      }, i * 400);
+    }
+  }, 500);
 });

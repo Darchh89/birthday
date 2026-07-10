@@ -277,6 +277,41 @@
     </div>
   </section>
 
+  <!-- STAGE 5.8: Virtual Blow Cake -->
+  <section id="blow-cake" class="page">
+    <div class="page-inner">
+      <h2 class="section-title">Tiup Lilinnya Yuk! 🎂</h2>
+      <p class="cake-sub" id="cake-instruction">Pejamkan mata, make a wish dalam hati... 🤫</p>
+      
+      <div class="cake-container" id="cake-container">
+        <svg viewBox="0 0 200 200" class="cake-svg">
+          <!-- Plate -->
+          <ellipse cx="100" cy="160" rx="80" ry="12" fill="#eee" />
+          <!-- Cake Base Layer -->
+          <path d="M40,110 L160,110 L160,155 A60,10 0 0,1 40,155 Z" fill="#e07a5f" />
+          <!-- Top Frosting -->
+          <path d="M40,110 A60,10 0 0,1 160,110 L160,120 Q150,125 140,120 Q130,115 120,120 Q110,125 100,120 Q90,115 80,120 Q70,125 60,120 Q50,115 40,120 Z" fill="#f4f1de" />
+          <!-- Cream decoration dots -->
+          <circle cx="50" cy="108" r="4" fill="#e07a5f" />
+          <circle cx="75" cy="109" r="4" fill="#e07a5f" />
+          <circle cx="100" cy="110" r="4" fill="#e07a5f" />
+          <circle cx="125" cy="109" r="4" fill="#e07a5f" />
+          <circle cx="150" cy="108" r="4" fill="#e07a5f" />
+          <!-- Candle -->
+          <rect x="97" y="55" width="6" height="35" fill="#f2cc8f" rx="1" />
+          <!-- Stripes on candle -->
+          <path d="M97,60 L103,63 M97,70 L103,73 M97,80 L103,83" stroke="#e07a5f" stroke-width="1.5" />
+          <!-- Flame -->
+          <path id="candle-flame" class="flame" d="M100,32 Q105,42 100,52 Q95,42 100,32" fill="#ffb703" cursor="pointer" />
+          <!-- Smoke (hidden initially) -->
+          <path id="candle-smoke" class="smoke hidden" d="M100,48 Q97,38 103,28 Q100,23 100,18" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </div>
+      
+      <button id="btn-next-cake" class="btn-main reveal-btn">Next →</button>
+    </div>
+  </section>
+
   <!-- STAGE 6: Final -->
   <section id="final" class="page">
     <div class="page-inner">
