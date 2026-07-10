@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Birthday 🤍</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css nya.css">
+</head>
+<body>
+
+  <audio id="bg-music" loop preload="auto">
+    <source src="love.mp3" type="audio/mpeg">
+  </audio>
+
+  <canvas id="particles"></canvas>
+
+  <!-- STAGE 1: Cover -->
+  <section id="cover" class="page active">
+    <div class="cover-content">
+      <p class="cover-sub">i made something for you...</p>
+      <h1 class="cover-title">🤍</h1>
+      <button id="btn-open" class="btn-main">tap to open</button>
+    </div>
+  </section>
+
+  <!-- STAGE 2: Greeting -->
+  <section id="greeting" class="page">
+    <div class="page-inner">
+      <p class="greeting-emoji">🎂</p>
+      <h1 class="greeting-title">Happy Birthday!</h1>
+      <p class="greeting-name" id="greeting-name"></p>
+      <p class="greeting-date">10 Juli 2026</p>
+      <button id="btn-next1" class="btn-main hidden">next →</button>
+    </div>
+  </section>
+
+  <!-- STAGE 3: Letter -->
+  <section id="letter" class="page">
+    <div class="page-inner">
+      <h2 class="section-title">surat kecil buat kamu 💌</h2>
+      <div class="letter-box">
+        <p id="typed-letter"></p>
+        <span id="cursor">|</span>
+      </div>
+      <button id="btn-next2" class="btn-main hidden">next →</button>
+    </div>
+  </section>
+
+  <!-- STAGE 4: Memories -->
+  <section id="memories" class="page">
+    <div class="page-inner">
+      <h2 class="section-title">our memories 📸</h2>
+      <div class="photo-grid">
+        <div class="photo-card">
+          <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=400&h=400&fit=crop" alt="memory">
+          <p class="photo-caption">moment yang gak akan aku lupain 🌸</p>
+        </div>
+        <div class="photo-card">
+          <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=400&fit=crop" alt="memory">
+          <p class="photo-caption">senyum kamu tuh obat segala galau ☀️</p>
+        </div>
+        <div class="photo-card">
+          <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=400&fit=crop" alt="memory">
+          <p class="photo-caption">hari-hari terbaik bersamamu 🤍</p>
+        </div>
+      </div>
+      <button id="btn-next3" class="btn-main">next →</button>
+    </div>
+  </section>
+
+  <!-- STAGE 5: Quiz -->
+  <section id="quiz" class="page">
+    <div class="page-inner">
+      <p class="quiz-emoji">🥺👉👈</p>
+      <h2 class="section-title">btw, kamu sayang aku gak?</h2>
+      <div class="quiz-area" id="quiz-area">
+        <button id="btn-yes" class="btn-main">sayang banget! 🥰</button>
+        <button id="btn-no" class="btn-secondary">enggak 😜</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 6: Reasons I Love You -->
+  <section id="reasons" class="page">
+    <div class="page-inner">
+      <p class="reasons-emoji">🥰</p>
+      <h2 class="section-title">aku juga sayang kamu! 💕</h2>
+      <p class="reasons-sub">hal yang aku suka dari kamu:</p>
+      <ul class="reasons-list" id="reasons-list">
+        <li>senyum kamu yang bikin hari aku cerah ☀️</li>
+        <li>cara kamu ketawa yang bikin aku ikut ketawa 😆</li>
+        <li>perhatian kecil kamu yang berarti banget 🌸</li>
+        <li>kamu selalu tau cara bikin aku tenang 🤍</li>
+        <li>kamu tuh segalanya buat aku 💖</li>
+      </ul>
+      <button id="btn-next4" class="btn-main hidden">lanjut →</button>
+    </div>
+  </section>
+
+  <!-- STAGE 7: Bouquet -->
+  <section id="bouquet" class="page">
+    <div class="page-inner">
+      <p class="bouquet-sub">dan ini buat kamu... 🤍</p>
+
+      <div class="bouquet-svg-wrap">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" class="bouquet-svg">
+          <!-- Stems -->
+          <g class="bq-anim" style="--d:0.1s">
+            <line x1="150" y1="350" x2="150" y2="120" stroke="#3a7d44" stroke-width="4" stroke-linecap="round"/>
+            <line x1="150" y1="350" x2="112" y2="100" stroke="#3a7d44" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="150" y1="350" x2="188" y2="100" stroke="#3a7d44" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="150" y1="350" x2="82" y2="135" stroke="#3a7d44" stroke-width="3" stroke-linecap="round"/>
+            <line x1="150" y1="350" x2="218" y2="135" stroke="#3a7d44" stroke-width="3" stroke-linecap="round"/>
+            <line x1="150" y1="350" x2="62" y2="155" stroke="#3a7d44" stroke-width="3" stroke-linecap="round"/>
+            <line x1="150" y1="350" x2="238" y2="155" stroke="#3a7d44" stroke-width="3" stroke-linecap="round"/>
+          </g>
+
+          <!-- Wrapping paper (white/cream) -->
+          <g class="bq-anim" style="--d:0.2s">
+            <polygon points="150,370 55,195 75,178 150,188 225,178 245,195" fill="#f5f0e8" stroke="#e0d8cc" stroke-width="1.2"/>
+            <polygon points="150,370 150,188 225,178 245,195" fill="#ebe5da" stroke="none"/>
+            <line x1="150" y1="370" x2="95" y2="190" stroke="#ddd5c8" stroke-width="0.8" opacity="0.4"/>
+            <line x1="150" y1="370" x2="205" y2="187" stroke="#ddd5c8" stroke-width="0.8" opacity="0.4"/>
+          </g>
+
+          <!-- Leaves -->
+          <g class="bq-anim" style="--d:0.35s">
+            <ellipse cx="72" cy="150" rx="24" ry="8" fill="#4a9e5f" transform="rotate(-50 72 150)"/>
+            <ellipse cx="60" cy="170" rx="22" ry="7" fill="#3d8a50" transform="rotate(-60 60 170)"/>
+            <ellipse cx="228" cy="150" rx="24" ry="8" fill="#4a9e5f" transform="rotate(50 228 150)"/>
+            <ellipse cx="240" cy="170" rx="22" ry="7" fill="#3d8a50" transform="rotate(60 240 170)"/>
+            <ellipse cx="100" cy="108" rx="20" ry="7" fill="#5aae6f" transform="rotate(-35 100 108)"/>
+            <ellipse cx="200" cy="105" rx="20" ry="7" fill="#5aae6f" transform="rotate(35 200 105)"/>
+            <ellipse cx="130" cy="88" rx="17" ry="6" fill="#4a9e5f" transform="rotate(-20 130 88)"/>
+            <ellipse cx="178" cy="82" rx="17" ry="6" fill="#4a9e5f" transform="rotate(20 178 82)"/>
+          </g>
+
+          <!-- Rose 1 (center top, biggest) -->
+          <g class="bq-anim" style="--d:0.5s" transform="translate(125,62)">
+            <circle cx="25" cy="25" r="26" fill="#c41830"/>
+            <circle cx="25" cy="25" r="21" fill="#d42040"/>
+            <circle cx="25" cy="25" r="16" fill="#e02848"/>
+            <path d="M25,8 Q31,16 25,25 Q19,16 25,8" fill="#b01428" opacity="0.7"/>
+            <path d="M8,25 Q16,19 25,25 Q16,31 8,25" fill="#b01428" opacity="0.7"/>
+            <path d="M42,25 Q34,19 25,25 Q34,31 42,25" fill="#c41830" opacity="0.7"/>
+            <path d="M25,42 Q19,34 25,25 Q31,34 25,42" fill="#c41830" opacity="0.7"/>
+            <circle cx="25" cy="25" r="8" fill="#a01020"/>
+            <circle cx="25" cy="25" r="4" fill="#8a0c18"/>
+          </g>
+
+          <!-- Rose 2 (left) -->
+          <g class="bq-anim" style="--d:0.65s" transform="translate(55,105)">
+            <circle cx="20" cy="20" r="23" fill="#c41830"/>
+            <circle cx="20" cy="20" r="18" fill="#d42040"/>
+            <circle cx="20" cy="20" r="14" fill="#e02848"/>
+            <path d="M20,6 Q25,12 20,20 Q15,12 20,6" fill="#b01428" opacity="0.7"/>
+            <path d="M6,20 Q12,15 20,20 Q12,25 6,20" fill="#b01428" opacity="0.7"/>
+            <path d="M34,20 Q28,15 20,20 Q28,25 34,20" fill="#c41830" opacity="0.7"/>
+            <circle cx="20" cy="20" r="7" fill="#a01020"/>
+            <circle cx="20" cy="20" r="3.5" fill="#8a0c18"/>
+          </g>
+
+          <!-- Rose 3 (right) -->
+          <g class="bq-anim" style="--d:0.8s" transform="translate(188,110)">
+            <circle cx="20" cy="20" r="23" fill="#c41830"/>
+            <circle cx="20" cy="20" r="18" fill="#d42040"/>
+            <circle cx="20" cy="20" r="14" fill="#e02848"/>
+            <path d="M20,6 Q25,12 20,20 Q15,12 20,6" fill="#b01428" opacity="0.7"/>
+            <path d="M34,20 Q28,15 20,20 Q28,25 34,20" fill="#c41830" opacity="0.7"/>
+            <path d="M20,34 Q15,28 20,20 Q25,28 20,34" fill="#c41830" opacity="0.7"/>
+            <circle cx="20" cy="20" r="7" fill="#a01020"/>
+            <circle cx="20" cy="20" r="3.5" fill="#8a0c18"/>
+          </g>
+
+          <!-- Tulip 1 (top right) -->
+          <g class="bq-anim" style="--d:0.6s" transform="translate(175,58)">
+            <ellipse cx="7" cy="20" rx="8" ry="17" fill="#f0a500" transform="rotate(-10 7 20)"/>
+            <ellipse cx="25" cy="20" rx="8" ry="17" fill="#f0a500" transform="rotate(10 25 20)"/>
+            <ellipse cx="16" cy="18" rx="7" ry="18" fill="#ffd700"/>
+          </g>
+
+          <!-- Tulip 2 (top left) -->
+          <g class="bq-anim" style="--d:0.7s" transform="translate(82,60)">
+            <ellipse cx="7" cy="20" rx="8" ry="16" fill="#f0a500" transform="rotate(-8 7 20)"/>
+            <ellipse cx="23" cy="20" rx="8" ry="16" fill="#f0a500" transform="rotate(8 23 20)"/>
+            <ellipse cx="15" cy="18" rx="7" ry="17" fill="#ffd700"/>
+          </g>
+
+          <!-- Purple flowers (left cluster) -->
+          <g class="bq-anim" style="--d:0.9s">
+            <circle cx="55" cy="148" r="6" fill="#b07ed8"/><circle cx="55" cy="148" r="2.2" fill="#f0e0ff"/>
+            <circle cx="46" cy="138" r="5.5" fill="#c896e8"/><circle cx="46" cy="138" r="2" fill="#f0e0ff"/>
+            <circle cx="64" cy="139" r="5" fill="#a070c8"/><circle cx="64" cy="139" r="1.8" fill="#f0e0ff"/>
+            <circle cx="48" cy="158" r="4.5" fill="#c896e8"/><circle cx="48" cy="158" r="1.5" fill="#f0e0ff"/>
+            <circle cx="42" cy="150" r="4" fill="#9868b8"/>
+          </g>
+
+          <!-- Purple flowers (right cluster) -->
+          <g class="bq-anim" style="--d:1.0s">
+            <circle cx="245" cy="148" r="6" fill="#b07ed8"/><circle cx="245" cy="148" r="2.2" fill="#f0e0ff"/>
+            <circle cx="236" cy="138" r="5.5" fill="#c896e8"/><circle cx="236" cy="138" r="2" fill="#f0e0ff"/>
+            <circle cx="253" cy="140" r="5" fill="#a070c8"/><circle cx="253" cy="140" r="1.8" fill="#f0e0ff"/>
+            <circle cx="250" cy="156" r="4.5" fill="#c896e8"/><circle cx="250" cy="156" r="1.5" fill="#f0e0ff"/>
+            <circle cx="258" cy="150" r="4" fill="#9868b8"/>
+          </g>
+
+          <!-- Ribbon bow -->
+          <g class="bq-anim" style="--d:0.3s">
+            <path d="M140,270 Q132,300 122,320" stroke="#d4a050" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+            <path d="M160,270 Q168,300 178,320" stroke="#d4a050" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+            <ellipse cx="130" cy="262" rx="18" ry="11" fill="#d4a050" transform="rotate(-15 130 262)"/>
+            <ellipse cx="170" cy="262" rx="18" ry="11" fill="#d4a050" transform="rotate(15 170 262)"/>
+            <circle cx="150" cy="265" r="8" fill="#c49040"/>
+            <circle cx="150" cy="265" r="5" fill="#b48030"/>
+          </g>
+
+          <!-- Card/Envelope -->
+          <g class="bq-anim" style="--d:0.45s" transform="translate(180,200) rotate(12)">
+            <rect x="0" y="0" width="48" height="36" rx="3" fill="#fff" stroke="#ddd" stroke-width="1.2"/>
+            <polygon points="0,0 24,16 48,0" fill="none" stroke="#ddd" stroke-width="0.8"/>
+            <text x="24" y="25" text-anchor="middle" font-family="'Dancing Script', cursive" font-size="9" fill="#888" font-weight="700">To You</text>
+            <text x="24" y="34" text-anchor="middle" font-size="7" fill="#e03050">&#9829;</text>
+          </g>
+        </svg>
+      </div>
+
+      <p class="bouquet-msg">a bouquet for the prettiest person i know 💐</p>
+      <button id="btn-next5" class="btn-main">next →</button>
+    </div>
+  </section>
+
+  <!-- STAGE 6: Final -->
+  <section id="final" class="page">
+    <div class="page-inner">
+      <p class="final-emoji">🎉</p>
+      <h1 class="final-title">Happy Birthday<br>Sayangku!</h1>
+      <p class="final-msg">
+        Semoga di umur yang baru ini, kamu makin bahagia, sehat selalu, dan semua doamu terkabul. 
+        Makasih udah jadi bagian terindah di hidupku. I love you! 💕
+      </p>
+      <p class="final-sign">— from someone who loves you 🤍</p>
+      <a id="wa-link" href="#" target="_blank" class="btn-wa">kirim balasan via WhatsApp 💬</a>
+    </div>
+  </section>
+
+  <script src="logik.js"></script>
+</body>
+</html>
