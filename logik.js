@@ -460,6 +460,18 @@ setTimeout(() => {
       const loader = document.getElementById('loader');
       if (loader) {
         loader.classList.add('fade-out');
+        
+        // Show Cover page (Stage 1)
+        pages.cover.classList.add('active');
+        
+        // Force reflow/reset of cover-content animations
+        const coverInner = pages.cover.querySelector('.cover-content');
+        if (coverInner) {
+          coverInner.style.animation = 'none';
+          coverInner.offsetHeight; // force reflow
+          coverInner.style.animation = '';
+        }
+        
         clearInterval(checkInterval);
         setTimeout(() => {
           loader.style.display = 'none';

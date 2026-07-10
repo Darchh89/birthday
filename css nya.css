@@ -649,11 +649,11 @@ body {
 .loader-wrap {
   position: fixed;
   inset: 0;
-  background: #3d0d1c; /* matches body background */
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* on top of everything */
+  z-index: 9999;
   opacity: 1;
   transition: opacity 0.8s ease;
 }
