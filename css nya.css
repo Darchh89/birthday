@@ -207,7 +207,7 @@ body {
   backface-visibility: visible;
 }
 
-/* Box Body size: 100px wide, 85px high, 100px deep */
+/* Box Body — deep charcoal */
 .box-body {
   position: absolute;
   width: 100px;
@@ -245,11 +245,11 @@ body {
 .body-right  { transform: rotateY( 90deg) translateZ(50px); }
 .body-bottom { transform: translateY(35px) rotateX(90deg); background: #eee; }
 
-/* Ribbon details on body faces */
+/* Ribbon on body faces */
 .body-face::before {
   content: '';
   position: absolute;
-  background: #a8203c; /* wine red ribbon */
+  background: #e03050;
   box-shadow: 0 0 5px rgba(0,0,0,0.08);
 }
 .body-front::before, .body-back::before, .body-left::before, .body-right::before {
@@ -259,7 +259,7 @@ body {
   height: 100%;
 }
 
-/* Box Lid size: 106px wide, 20px high, 106px deep */
+/* Box Lid — deep burgundy */
 .box-lid {
   position: absolute;
   width: 106px;
@@ -273,7 +273,7 @@ body {
 
 .lid-face {
   position: absolute;
-  background: #a8203c; /* dark wine red lid */
+  background: #e03050; /* hot rose red lid */
   border: 1px solid rgba(0,0,0,0.15);
   box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
 }
@@ -297,11 +297,11 @@ body {
 .lid-right { transform: rotateY( 90deg) translateZ(53px); }
 .lid-top   { transform: translateY(-53px) rotateX(90deg); }
 
-/* Ribbon details on Lid top */
+/* Ribbon on Lid top */
 .lid-top::before, .lid-top::after {
   content: '';
   position: absolute;
-  background: #ffd166; /* gold cross ribbon on lid */
+  background: #ffd166; /* gold cross ribbon */
   box-shadow: 0 0 4px rgba(0,0,0,0.15);
 }
 .lid-top::before {
@@ -317,7 +317,7 @@ body {
   height: 18px;
 }
 
-/* Ribbons on lid sides */
+/* Ribbon on lid sides */
 .lid-front::before, .lid-back::before, .lid-left::before, .lid-right::before {
   content: '';
   position: absolute;
@@ -328,15 +328,69 @@ body {
   background: #ffd166;
 }
 
-/* Ribbon Bow on Lid top center */
+/* === 3D Raised Ribbon Bow === */
 .lid-bow {
   position: absolute;
-  top: -24px;
+  top: -30px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 2.2rem;
+  width: 60px;
+  height: 30px;
   z-index: 15;
-  text-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.bow-loop {
+  position: absolute;
+  width: 26px;
+  height: 20px;
+  background: linear-gradient(135deg, #ffe08a, #e6b84d);
+  border-radius: 50% 50% 20% 20%;
+  box-shadow:
+    0 3px 8px rgba(0,0,0,0.35),
+    inset 0 -4px 6px rgba(0,0,0,0.15),
+    inset 0 3px 4px rgba(255,255,255,0.25);
+  top: 0;
+}
+.bow-left {
+  left: 2px;
+  transform: rotate(-20deg);
+}
+.bow-right {
+  right: 2px;
+  transform: rotate(20deg);
+}
+
+.bow-knot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle, #ffe08a, #c9960a);
+  border-radius: 50%;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.4),
+    inset 0 2px 3px rgba(255,255,255,0.3);
+  z-index: 2;
+}
+
+.bow-tail {
+  position: absolute;
+  width: 8px;
+  height: 18px;
+  background: linear-gradient(180deg, #ffe08a, #c9960a);
+  border-radius: 0 0 4px 4px;
+  top: 18px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+}
+.bow-tail-l {
+  left: 14px;
+  transform: rotate(12deg);
+}
+.bow-tail-r {
+  right: 14px;
+  transform: rotate(-12deg);
 }
 
 /* Open Animation trigger states */
