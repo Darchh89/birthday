@@ -27,6 +27,10 @@ body {
   pointer-events: none;
 }
 
+#particles.on-top {
+  z-index: 10001 !important;
+}
+
 /* === PAGES === */
 .page {
   position: fixed;
@@ -988,6 +992,10 @@ body {
 .loader-wrap.fade-out {
   opacity: 0;
   pointer-events: none;
+}
+
+.loader-wrap.solid-bg {
+  background: linear-gradient(180deg, #3d0d1c 0%, #471323 50%, #2b0812 100%) !important;
 }
 
 /* === FLOATING MUSIC PLAYER === */

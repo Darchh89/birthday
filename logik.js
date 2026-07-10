@@ -288,8 +288,42 @@ document.getElementById('btn-next5').addEventListener('click', () => {
 
 // --- STAGE 3: Letter → Memories ---
 document.getElementById('btn-next2').addEventListener('click', () => {
-  goTo(pages.letter, pages.memories);
-  revealMemories();
+  const loader = document.getElementById('loader');
+  const particles = document.getElementById('particles');
+  if (loader) {
+    // 1. Prepare loader text, solid background, and put canvas particles on top of it
+    loader.querySelector('.loader-text').innerHTML = 'memuat kenangan manis... <span style="display:inline-block; animation: spinFlower 2.5s linear infinite;">🌸</span>';
+    loader.classList.add('solid-bg');
+    loader.style.display = 'flex';
+    if (particles) particles.classList.add('on-top');
+    
+    // Force a CSS reflow
+    loader.offsetHeight;
+    
+    // 2. Fade in the loader
+    loader.classList.remove('fade-out');
+    
+    // 3. Wait for 2.0 seconds, transition page, and fade out loader
+    setTimeout(() => {
+      goTo(pages.letter, pages.memories);
+      revealMemories();
+      
+      // Fade out loader again
+      loader.classList.add('fade-out');
+      
+      // Fully hide the loader and reset its settings after fade-out transition
+      setTimeout(() => {
+        loader.style.display = 'none';
+        loader.classList.remove('solid-bg');
+        if (particles) particles.classList.remove('on-top');
+        loader.querySelector('.loader-text').textContent = 'preparing something special for you...';
+      }, 800);
+    }, 2000);
+  } else {
+    // Fallback if loader is not found
+    goTo(pages.letter, pages.memories);
+    revealMemories();
+  }
 });
 
 // --- STAGE 4: Memories → Quiz ---
