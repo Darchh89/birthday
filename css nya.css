@@ -7,7 +7,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: #0d0d0d;
+  background: linear-gradient(180deg, #3d0d1c 0%, #471323 50%, #2b0812 100%);
   color: #fff;
   overflow: hidden;
   height: 100vh;
@@ -222,35 +222,81 @@ body {
 .photo-grid {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin-bottom: 10px;
+  gap: 24px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .photo-card {
-  border-radius: 12px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  animation: fadeUp 0.5s ease forwards;
+  position: relative;
+  background: #fdfbf7; /* classic polaroid off-white */
+  padding: 12px 12px 20px 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+  animation: fadeUp 0.6s ease forwards;
   opacity: 0;
+  transition: transform 0.3s ease;
 }
 
-.photo-card:nth-child(1) { animation-delay: 0.1s; }
-.photo-card:nth-child(2) { animation-delay: 0.3s; }
-.photo-card:nth-child(3) { animation-delay: 0.5s; }
+.pc-1 {
+  transform: rotate(-3deg);
+  animation-delay: 0.1s;
+}
+
+.pc-2 {
+  transform: rotate(2deg) translateY(-8px);
+  animation-delay: 0.3s;
+  z-index: 2; /* overlap the middle photo */
+}
+
+.pc-3 {
+  transform: rotate(-2deg) translateY(-16px);
+  animation-delay: 0.5s;
+}
+
+.photo-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 75px;
+  height: 20px;
+  background: rgba(245, 240, 220, 0.45); /* masking tape look */
+  backdrop-filter: blur(1px);
+  border-left: 1px dashed rgba(0,0,0,0.04);
+  border-right: 1px dashed rgba(0,0,0,0.04);
+  z-index: 10;
+}
 
 .photo-card img {
   width: 100%;
-  height: 200px;
+  height: 190px;
   object-fit: cover;
   display: block;
+  border: 1px solid rgba(0,0,0,0.05);
 }
 
 .photo-caption {
-  padding: 12px 16px;
-  font-size: 0.82rem;
-  color: #999;
-  font-style: italic;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.05rem;
+  color: #4a3c31; /* sepia-toned handwriting color */
+  margin-top: 14px;
+  text-align: center;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.photo-flower {
+  font-size: 0.95rem;
+  animation: floatFlower 3s ease-in-out infinite alternate;
+  display: inline-block;
+}
+
+@keyframes floatFlower {
+  from { transform: translateY(0) rotate(0); }
+  to { transform: translateY(-2px) rotate(10deg); }
 }
 
 /* === QUIZ === */
