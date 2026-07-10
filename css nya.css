@@ -351,38 +351,76 @@ body {
 
 /* === MEMORIES === */
 .photo-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 32px; /* cleaner, more readable gap */
-  margin-top: 24px;
-  margin-bottom: 24px;
+  position: relative;
+  width: 290px;
+  height: 335px; /* height of stacked polaroids */
+  margin: 35px auto 10px auto;
 }
 
 .photo-card {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 5px;
+  width: 280px;
   background: #fdfbf7; /* classic polaroid off-white */
-  padding: 24px 12px 20px 12px; /* added top padding to separate tape from image */
-  border: 1px solid rgba(0, 0, 0, 0.05); /* clean boundary */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28); /* slightly softer shadows */
-  animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  padding: 24px 12px 16px 12px; /* top padding for tape */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
   opacity: 0;
-  transition: transform 0.3s ease;
+  cursor: pointer;
+  transform: translate(var(--tx, 0), var(--ty, 0)) rotate(var(--rot, 0deg));
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15), opacity 0.5s ease;
+  animation: cardFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  user-select: none;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(var(--tx, 0), calc(var(--ty, 0) + 40px)) rotate(var(--rot, 0deg)) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(var(--tx, 0), var(--ty, 0)) rotate(var(--rot, 0deg)) scale(1);
+  }
 }
 
 .pc-1 {
-  transform: rotate(-2deg);
+  --tx: -8px;
+  --ty: -12px;
+  --rot: -4deg;
   animation-delay: 0.3s;
+  z-index: 3;
 }
 
 .pc-2 {
-  transform: rotate(1.5deg);
+  --tx: 8px;
+  --ty: -4px;
+  --rot: 3deg;
   animation-delay: 0.9s;
   z-index: 2;
 }
 
 .pc-3 {
-  transform: rotate(-1.5deg);
+  --tx: -4px;
+  --ty: 6px;
+  --rot: -2deg;
   animation-delay: 1.5s;
+  z-index: 1;
+}
+
+.photo-card.swipe {
+  transform: translate(280px, -80px) rotate(20deg) scale(0.85) !important;
+  opacity: 0 !important;
+}
+
+.photo-tip {
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-style: italic;
+  letter-spacing: 0.5px;
 }
 
 .photo-tape {

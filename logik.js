@@ -6,9 +6,9 @@
    ========================================== */
 
 const CONFIG = {
-  nama: "Sayangku",                    // Ganti dengan nama pacar kamu
-  tanggal: "10 Juli 2026",             // Ganti tanggal ultahnya
-  nomorWA: "628123456789",             // Ganti nomor WA kamu (format 628xxx)
+  nama: "Dara",                    // Ganti dengan nama pacar kamu
+  tanggal: "27 Juli 2026",             // Ganti tanggal ultahnya
+  nomorWA: "6285733136250",             // Ganti nomor WA kamu (format 628xxx)
 
   // Kuis Hubungan Kita (bisa diedit sesuka hati)
   kuis: [
@@ -30,7 +30,7 @@ const CONFIG = {
   ],
 
   // Isi surat — tulis sesuka hati kamu
-  surat: `Hai sayang... 💕
+  surat: `My dearest Dara... 💕
 
 Aku cuma mau bilang, selamat ulang tahun ya! Di hari spesial ini, aku bersyukur banget bisa kenal kamu dan jadi bagian dari hidupmu.
 
@@ -480,3 +480,23 @@ setTimeout(() => {
     }
   }, 100);
 }, 2500);
+
+// --- Polaroid Stack Interactive Cycling ---
+const cards = document.querySelectorAll('.photo-card');
+let zIndexCounter = 3;
+
+cards.forEach(card => {
+  card.addEventListener('click', () => {
+    // Only cycle if not already animating/swiping
+    if (card.classList.contains('swipe')) return;
+    
+    card.classList.add('swipe');
+    
+    // After swipe out completes, send it to the bottom of the stack
+    setTimeout(() => {
+      zIndexCounter--;
+      card.style.zIndex = zIndexCounter - 5;
+      card.classList.remove('swipe');
+    }, 450);
+  });
+});
