@@ -46,23 +46,23 @@ body {
 
 .page.active {
   display: flex;
-  animation: fadeInPage 0.5s ease forwards;
+  animation: slideInPage 0.55s cubic-bezier(0.34, 1.28, 0.64, 1) forwards;
 }
 
 .page.leaving {
   display: flex;
   pointer-events: none;
-  animation: fadeOutPage 0.5s ease forwards;
+  animation: slideOutPage 0.45s cubic-bezier(0.4, 0, 0.6, 1) forwards;
 }
 
-@keyframes fadeInPage {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes slideInPage {
+  from { opacity: 0; transform: translateY(28px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
 }
 
-@keyframes fadeOutPage {
-  from { opacity: 1; }
-  to { opacity: 0; }
+@keyframes slideOutPage {
+  from { opacity: 1; transform: translateY(0)     scale(1); }
+  to   { opacity: 0; transform: translateY(-20px) scale(0.97); }
 }
 
 .page-inner {
@@ -70,7 +70,7 @@ body {
   max-width: 420px;
   width: 100%;
   margin: auto 0; /* vertical center if fits, scrollable from top if overflows */
-  animation: fadeUp 0.6s ease forwards;
+  animation: fadeUp 0.65s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
   will-change: opacity, transform;
 }
 
@@ -805,6 +805,32 @@ body {
   color: #888;
   font-style: italic;
   margin-top: 24px;
+}
+
+.bouquet-hint {
+  font-size: 0.82rem;
+  color: #ffd166;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+  animation: textPulse 1.6s ease-in-out infinite alternate;
+}
+
+/* Clickable letter glow animation */
+.bouquet-letter-click {
+  animation: letterGlow 1.5s ease-in-out infinite alternate;
+  cursor: pointer;
+}
+
+@keyframes letterGlow {
+  from {
+    filter: drop-shadow(0 0 4px rgba(255, 209, 102, 0.4));
+    transform: scale(1);
+  }
+  to {
+    filter: drop-shadow(0 0 14px rgba(255, 209, 102, 0.9));
+    transform: scale(1.05);
+  }
 }
 
 .bouquet-svg-wrap {

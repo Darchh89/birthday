@@ -88,7 +88,7 @@ function goTo(from, to) {
   setTimeout(() => {
     from.classList.remove('active');
     from.classList.remove('leaving');
-  }, 500);
+  }, 550);
 }
 
 // --- Floating Hearts Particle System ---
@@ -274,16 +274,26 @@ document.getElementById('btn-next1').addEventListener('click', () => {
   goTo(pages.greeting, pages.bouquet);
 });
 
-// --- STAGE 7: Bouquet → Letter ---
-document.getElementById('btn-next5').addEventListener('click', () => {
-  goTo(pages.bouquet, pages.letter);
-  // start typing letter
-  const letterEl = document.getElementById('typed-letter');
-  const cursorEl = document.getElementById('cursor');
-  typeText(letterEl, CONFIG.surat, 35, () => {
-    cursorEl.style.display = 'none';
-    document.getElementById('btn-next2').classList.add('show');
-  });
+// --- STAGE 7: Bouquet Letter Click → Letter ---
+document.getElementById('bouquet-letter').addEventListener('click', () => {
+  const letter = document.getElementById('bouquet-letter');
+  
+  // Play a quick pop animation before transitioning
+  letter.style.transition = 'transform 0.15s ease';
+  letter.style.transform = 'scale(1.25)';
+  setTimeout(() => { letter.style.transform = 'scale(0.9)'; }, 150);
+  setTimeout(() => { letter.style.transform = 'scale(1)'; }, 280);
+  
+  setTimeout(() => {
+    goTo(pages.bouquet, pages.letter);
+    // start typing letter
+    const letterEl = document.getElementById('typed-letter');
+    const cursorEl = document.getElementById('cursor');
+    typeText(letterEl, CONFIG.surat, 35, () => {
+      cursorEl.style.display = 'none';
+      document.getElementById('btn-next2').classList.add('show');
+    });
+  }, 350);
 });
 
 // --- STAGE 3: Letter → Memories ---
