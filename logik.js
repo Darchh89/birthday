@@ -218,19 +218,36 @@ const giftBox = document.getElementById('gift-box');
 function openGift() {
   audio.play().catch(() => {});
   giftBox.classList.add('open');
-  btnOpen.style.transition = 'opacity 0.5s ease';
+  btnOpen.style.transition = 'opacity 0.6s ease';
   btnOpen.style.opacity = '0';
   btnOpen.style.pointerEvents = 'none';
 
   // Reveal floating music player
   document.getElementById('music-player').classList.remove('hidden');
 
+  // Fountain of heart confetti bursting from the box!
+  const boxX = window.innerWidth / 2;
+  const boxY = window.innerHeight / 2 - 40;
+  
+  // First burst instantly
+  burstConfetti(boxX, boxY, 20);
+  
+  // Second burst as the lid hits peak height
+  setTimeout(() => {
+    burstConfetti(boxX, boxY - 40, 25);
+  }, 450);
+
+  // Third burst as the lid starts descending
+  setTimeout(() => {
+    burstConfetti(boxX, boxY - 10, 20);
+  }, 900);
+
   setTimeout(() => {
     goTo(pages.cover, pages.greeting);
     typeText(document.getElementById('greeting-name'), CONFIG.nama, 120, () => {
       document.getElementById('btn-next1').classList.add('show');
     });
-  }, 1000);
+  }, 2000); // 2.0 seconds delay to let the gorgeous 3D opening animation finish fully
 }
 
 btnOpen.addEventListener('click', openGift);
