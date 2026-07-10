@@ -266,6 +266,7 @@ document.getElementById('btn-next5').addEventListener('click', () => {
 // --- STAGE 3: Letter → Memories ---
 document.getElementById('btn-next2').addEventListener('click', () => {
   goTo(pages.letter, pages.memories);
+  revealMemories();
 });
 
 // --- STAGE 4: Memories → Quiz ---
@@ -483,20 +484,41 @@ setTimeout(() => {
 
 // --- Polaroid Stack Interactive Cycling ---
 const cards = document.querySelectorAll('.photo-card');
-let zIndexCounter = 3;
 
 cards.forEach(card => {
   card.addEventListener('click', () => {
-    // Only cycle if not already animating/swiping
-    if (card.classList.contains('swipe')) return;
+    // Only cycle if this card is currently the top card AND not already animating
+    if (!card.classList.contains('state-top') || card.classList.contains('swipe')) return;
     
+    const midCard = document.querySelector('.photo-card.state-mid');
+    const botCard = document.querySelector('.photo-card.state-bot');
+    
+    // Swipe out the top card
     card.classList.add('swipe');
     
-    // After swipe out completes, send it to the bottom of the stack
+    // Shift middle to top, bottom to middle
+    if (midCard) {
+      midCard.classList.remove('state-mid');
+      midCard.classList.add('state-top');
+    }
+    if (botCard) {
+      botCard.classList.remove('state-bot');
+      botCard.classList.add('state-mid');
+    }
+    
+    // After swipe out finishes, make this card the bottom card
     setTimeout(() => {
-      zIndexCounter--;
-      card.style.zIndex = zIndexCounter - 5;
+      card.classList.remove('state-top');
+      card.classList.add('state-bot');
       card.classList.remove('swipe');
     }, 450);
   });
 });
+
+// --- Trigger Polaroid Stagger Entrance ---
+function revealMemories() {
+  const cards = document.querySelectorAll('.photo-card');
+  cards.forEach(card => {
+    card.classList.add('show');
+  });
+}
