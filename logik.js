@@ -66,11 +66,6 @@ const audio = document.getElementById('bg-music');
 document.querySelector('.greeting-date').textContent = CONFIG.tanggal;
 document.querySelector('.final-msg').textContent = CONFIG.pesanAkhir;
 
-// WhatsApp link
-const waLink = document.getElementById('wa-link');
-const waMsg = `Makasih banyak ya sayang buat surprise-nya! Aku suka banget 🥺❤️`;
-waLink.href = `https://api.whatsapp.com/send?phone=${CONFIG.nomorWA}&text=${encodeURIComponent(waMsg)}`;
-
 // --- Page Navigation ---
 function goTo(from, to) {
   from.classList.add('leaving');
