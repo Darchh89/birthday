@@ -228,26 +228,22 @@ function openGift() {
   // Fountain of heart confetti bursting from the box!
   const boxX = window.innerWidth / 2;
   const boxY = window.innerHeight / 2 - 40;
-  
-  // First burst instantly
-  burstConfetti(boxX, boxY, 20);
-  
-  // Second burst as the lid hits peak height
-  setTimeout(() => {
-    burstConfetti(boxX, boxY - 40, 25);
-  }, 450);
 
-  // Third burst as the lid starts descending
-  setTimeout(() => {
-    burstConfetti(boxX, boxY - 10, 20);
-  }, 900);
+  // First burst instantly as the lid opens
+  burstConfetti(boxX, boxY, 25);
 
+  // Second burst as the lid moves up
+  setTimeout(() => {
+    burstConfetti(boxX, boxY - 40, 20);
+  }, 400);
+
+  // Transition to greeting page after 1.2s CSS transition completes fully
   setTimeout(() => {
     goTo(pages.cover, pages.greeting);
     typeText(document.getElementById('greeting-name'), CONFIG.nama, 120, () => {
       document.getElementById('btn-next1').classList.add('show');
     });
-  }, 2000); // 2.0 seconds delay to let the gorgeous 3D opening animation finish fully
+  }, 1200);
 }
 
 btnOpen.addEventListener('click', openGift);

@@ -402,48 +402,16 @@ body {
 }
 
 /* Open Animation trigger states */
-.gift-box-scene.open {
-  animation: none; /* stop floating */
-}
 .gift-box-scene.open .box-lid {
-  animation: lidOpen3D 2.2s cubic-bezier(0.25, 1, 0.4, 1) forwards;
+  transform: translateY(-160px) rotateX(-45deg) rotateY(60deg) scale(0.8);
+  opacity: 0;
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.3, 1), opacity 1.0s ease;
 }
+
 .gift-box-scene.open .box-body {
-  animation: bodyOpen3D 2.2s cubic-bezier(0.25, 1, 0.4, 1) forwards;
-}
-
-@keyframes lidOpen3D {
-  0% {
-    transform: translateY(0) rotateX(-22deg) rotateY(45deg);
-    opacity: 1;
-  }
-  40% {
-    /* Pop high into the air and spin wildly - slower rise */
-    transform: translateY(-210px) rotateX(80deg) rotateY(180deg) rotateZ(-35deg) scale(1.18);
-    opacity: 1;
-  }
-  100% {
-    /* Fall off down-right of the screen - graceful float down */
-    transform: translateY(240px) translateX(220px) rotateX(280deg) rotateY(360deg) scale(0.45);
-    opacity: 0;
-  }
-}
-
-@keyframes bodyOpen3D {
-  0% {
-    transform: translateY(0) rotateX(-22deg) rotateY(45deg) scale(1);
-    opacity: 1;
-  }
-  25% {
-    /* Bounce squash impact reaction */
-    transform: translateY(-6px) rotateX(-16deg) rotateY(40deg) scale3d(1.06, 0.94, 1.06);
-    opacity: 1;
-  }
-  100% {
-    /* Sink spiraling down and fade - slower descent */
-    transform: translateY(180px) rotateX(15deg) rotateY(-45deg) scale(0.3);
-    opacity: 0;
-  }
+  transform: translateY(80px) rotateX(15deg) scale(0.75);
+  opacity: 0;
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.3, 1), opacity 1.0s ease;
 }
 
 #btn-open {
