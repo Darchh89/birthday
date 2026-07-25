@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Happy Birthday 🤍</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@500;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="css nya.css">
 </head>
+
 <body>
 
   <!-- LOADER SCREEN -->
@@ -20,7 +24,7 @@
   </div>
 
   <audio id="bg-music" loop preload="auto">
-    <source src="love.mp3" type="audio/mpeg">
+    <source src="assets/audio/love.mp3" type="audio/mpeg">
   </audio>
 
   <canvas id="particles"></canvas>
@@ -32,11 +36,18 @@
         <div class="gift-box-3d">
           <!-- The Lid (tutup kado) -->
           <div class="box-lid">
+            <!-- Outside -->
             <div class="lid-face lid-top"></div>
             <div class="lid-face lid-front"></div>
             <div class="lid-face lid-back"></div>
             <div class="lid-face lid-left"></div>
             <div class="lid-face lid-right"></div>
+            <!-- Inside -->
+            <div class="lid-face-in lid-bottom-in"></div>
+            <div class="lid-face-in lid-front-in"></div>
+            <div class="lid-face-in lid-back-in"></div>
+            <div class="lid-face-in lid-left-in"></div>
+            <div class="lid-face-in lid-right-in"></div>
             <div class="lid-bow">
               <div class="bow-loop bow-left"></div>
               <div class="bow-loop bow-right"></div>
@@ -47,12 +58,24 @@
           </div>
           <!-- The Body (wadah kado) -->
           <div class="box-body">
+            <!-- Outside -->
             <div class="body-face body-front"></div>
             <div class="body-face body-back"></div>
             <div class="body-face body-left"></div>
             <div class="body-face body-right"></div>
             <div class="body-face body-bottom"></div>
+            <!-- Inside -->
+            <div class="body-face-in body-front-in"></div>
+            <div class="body-face-in body-back-in"></div>
+            <div class="body-face-in body-left-in"></div>
+            <div class="body-face-in body-right-in"></div>
+            <div class="body-face-in body-bottom-in"></div>
           </div>
+        </div>
+
+        <!-- Image that floats up from inside the box -->
+        <div class="box-message">
+          <img src="assets/images/surprise.jpg" alt="Surprise!" class="box-msg-img">
         </div>
       </div>
       <p class="cover-sub">i made something for you...</p>
@@ -80,139 +103,171 @@
         <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" class="bouquet-svg">
           <!-- Stems -->
           <g class="bq-anim" style="--d:0.1s">
-            <line x1="150" y1="350" x2="150" y2="120" stroke="#3a7d44" stroke-width="4" stroke-linecap="round"/>
-            <line x1="150" y1="350" x2="112" y2="100" stroke="#3a7d44" stroke-width="3.5" stroke-linecap="round"/>
-            <line x1="150" y1="350" x2="188" y2="100" stroke="#3a7d44" stroke-width="3.5" stroke-linecap="round"/>
-            <line x1="150" y1="350" x2="82" y2="135" stroke="#3a7d44" stroke-width="3" stroke-linecap="round"/>
-            <line x1="150" y1="350" x2="218" y2="135" stroke="#3a7d44" stroke-width="3" stroke-linecap="round"/>
-            <line x1="150" y1="350" x2="62" y2="155" stroke="#3a7d44" stroke-width="3" stroke-linecap="round"/>
-            <line x1="150" y1="350" x2="238" y2="155" stroke="#3a7d44" stroke-width="3" stroke-linecap="round"/>
+            <line x1="150" y1="350" x2="150" y2="120" stroke="#3a7d44" stroke-width="4" stroke-linecap="round" />
+            <line x1="150" y1="350" x2="112" y2="100" stroke="#3a7d44" stroke-width="3.5" stroke-linecap="round" />
+            <line x1="150" y1="350" x2="188" y2="100" stroke="#3a7d44" stroke-width="3.5" stroke-linecap="round" />
+            <line x1="150" y1="350" x2="82" y2="135" stroke="#3a7d44" stroke-width="3" stroke-linecap="round" />
+            <line x1="150" y1="350" x2="218" y2="135" stroke="#3a7d44" stroke-width="3" stroke-linecap="round" />
+            <line x1="150" y1="350" x2="62" y2="155" stroke="#3a7d44" stroke-width="3" stroke-linecap="round" />
+            <line x1="150" y1="350" x2="238" y2="155" stroke="#3a7d44" stroke-width="3" stroke-linecap="round" />
           </g>
 
           <!-- Wrapping paper (white/cream) -->
           <g class="bq-anim" style="--d:0.2s">
-            <polygon points="150,370 55,195 75,178 150,188 225,178 245,195" fill="#f5f0e8" stroke="#e0d8cc" stroke-width="1.2"/>
-            <polygon points="150,370 150,188 225,178 245,195" fill="#ebe5da" stroke="none"/>
-            <line x1="150" y1="370" x2="95" y2="190" stroke="#ddd5c8" stroke-width="0.8" opacity="0.4"/>
-            <line x1="150" y1="370" x2="205" y2="187" stroke="#ddd5c8" stroke-width="0.8" opacity="0.4"/>
+            <polygon points="150,370 55,195 75,178 150,188 225,178 245,195" fill="#f5f0e8" stroke="#e0d8cc"
+              stroke-width="1.2" />
+            <polygon points="150,370 150,188 225,178 245,195" fill="#ebe5da" stroke="none" />
+            <line x1="150" y1="370" x2="95" y2="190" stroke="#ddd5c8" stroke-width="0.8" opacity="0.4" />
+            <line x1="150" y1="370" x2="205" y2="187" stroke="#ddd5c8" stroke-width="0.8" opacity="0.4" />
           </g>
 
           <!-- Leaves -->
           <g class="bq-anim" style="--d:0.35s">
-            <ellipse cx="72" cy="150" rx="24" ry="8" fill="#4a9e5f" transform="rotate(-50 72 150)"/>
-            <ellipse cx="60" cy="170" rx="22" ry="7" fill="#3d8a50" transform="rotate(-60 60 170)"/>
-            <ellipse cx="228" cy="150" rx="24" ry="8" fill="#4a9e5f" transform="rotate(50 228 150)"/>
-            <ellipse cx="240" cy="170" rx="22" ry="7" fill="#3d8a50" transform="rotate(60 240 170)"/>
-            <ellipse cx="100" cy="108" rx="20" ry="7" fill="#5aae6f" transform="rotate(-35 100 108)"/>
-            <ellipse cx="200" cy="105" rx="20" ry="7" fill="#5aae6f" transform="rotate(35 200 105)"/>
-            <ellipse cx="130" cy="88" rx="17" ry="6" fill="#4a9e5f" transform="rotate(-20 130 88)"/>
-            <ellipse cx="178" cy="82" rx="17" ry="6" fill="#4a9e5f" transform="rotate(20 178 82)"/>
+            <ellipse cx="72" cy="150" rx="24" ry="8" fill="#4a9e5f" transform="rotate(-50 72 150)" />
+            <ellipse cx="60" cy="170" rx="22" ry="7" fill="#3d8a50" transform="rotate(-60 60 170)" />
+            <ellipse cx="228" cy="150" rx="24" ry="8" fill="#4a9e5f" transform="rotate(50 228 150)" />
+            <ellipse cx="240" cy="170" rx="22" ry="7" fill="#3d8a50" transform="rotate(60 240 170)" />
+            <ellipse cx="100" cy="108" rx="20" ry="7" fill="#5aae6f" transform="rotate(-35 100 108)" />
+            <ellipse cx="200" cy="105" rx="20" ry="7" fill="#5aae6f" transform="rotate(35 200 105)" />
+            <ellipse cx="130" cy="88" rx="17" ry="6" fill="#4a9e5f" transform="rotate(-20 130 88)" />
+            <ellipse cx="178" cy="82" rx="17" ry="6" fill="#4a9e5f" transform="rotate(20 178 82)" />
           </g>
 
           <!-- Rose 1 (center top, biggest) -->
           <g class="bq-anim" style="--d:0.5s">
             <g transform="translate(125,62)">
-              <circle cx="25" cy="25" r="26" fill="#c41830"/>
-              <circle cx="25" cy="25" r="21" fill="#d42040"/>
-              <circle cx="25" cy="25" r="16" fill="#e02848"/>
-              <path d="M25,8 Q31,16 25,25 Q19,16 25,8" fill="#b01428" opacity="0.7"/>
-              <path d="M8,25 Q16,19 25,25 Q16,31 8,25" fill="#b01428" opacity="0.7"/>
-              <path d="M42,25 Q34,19 25,25 Q34,31 42,25" fill="#c41830" opacity="0.7"/>
-              <path d="M25,42 Q19,34 25,25 Q31,34 25,42" fill="#c41830" opacity="0.7"/>
-              <circle cx="25" cy="25" r="8" fill="#a01020"/>
-              <circle cx="25" cy="25" r="4" fill="#8a0c18"/>
+              <circle cx="25" cy="25" r="26" fill="#c41830" />
+              <circle cx="25" cy="25" r="21" fill="#d42040" />
+              <circle cx="25" cy="25" r="16" fill="#e02848" />
+              <path d="M25,8 Q31,16 25,25 Q19,16 25,8" fill="#b01428" opacity="0.7" />
+              <path d="M8,25 Q16,19 25,25 Q16,31 8,25" fill="#b01428" opacity="0.7" />
+              <path d="M42,25 Q34,19 25,25 Q34,31 42,25" fill="#c41830" opacity="0.7" />
+              <path d="M25,42 Q19,34 25,25 Q31,34 25,42" fill="#c41830" opacity="0.7" />
+              <circle cx="25" cy="25" r="8" fill="#a01020" />
+              <circle cx="25" cy="25" r="4" fill="#8a0c18" />
             </g>
           </g>
 
           <!-- Rose 2 (left) -->
           <g class="bq-anim" style="--d:0.65s">
             <g transform="translate(55,105)">
-              <circle cx="20" cy="20" r="23" fill="#c41830"/>
-              <circle cx="20" cy="20" r="18" fill="#d42040"/>
-              <circle cx="20" cy="20" r="14" fill="#e02848"/>
-              <path d="M20,6 Q25,12 20,20 Q15,12 20,6" fill="#b01428" opacity="0.7"/>
-              <path d="M6,20 Q12,15 20,20 Q12,25 6,20" fill="#b01428" opacity="0.7"/>
-              <path d="M34,20 Q28,15 20,20 Q28,25 34,20" fill="#c41830" opacity="0.7"/>
-              <circle cx="20" cy="20" r="7" fill="#a01020"/>
-              <circle cx="20" cy="20" r="3.5" fill="#8a0c18"/>
+              <circle cx="20" cy="20" r="23" fill="#c41830" />
+              <circle cx="20" cy="20" r="18" fill="#d42040" />
+              <circle cx="20" cy="20" r="14" fill="#e02848" />
+              <path d="M20,6 Q25,12 20,20 Q15,12 20,6" fill="#b01428" opacity="0.7" />
+              <path d="M6,20 Q12,15 20,20 Q12,25 6,20" fill="#b01428" opacity="0.7" />
+              <path d="M34,20 Q28,15 20,20 Q28,25 34,20" fill="#c41830" opacity="0.7" />
+              <circle cx="20" cy="20" r="7" fill="#a01020" />
+              <circle cx="20" cy="20" r="3.5" fill="#8a0c18" />
             </g>
           </g>
 
           <!-- Rose 3 (right) -->
           <g class="bq-anim" style="--d:0.8s">
             <g transform="translate(188,110)">
-              <circle cx="20" cy="20" r="23" fill="#c41830"/>
-              <circle cx="20" cy="20" r="18" fill="#d42040"/>
-              <circle cx="20" cy="20" r="14" fill="#e02848"/>
-              <path d="M20,6 Q25,12 20,20 Q15,12 20,6" fill="#b01428" opacity="0.7"/>
-              <path d="M34,20 Q28,15 20,20 Q28,25 34,20" fill="#c41830" opacity="0.7"/>
-              <path d="M20,34 Q15,28 20,20 Q25,28 20,34" fill="#c41830" opacity="0.7"/>
-              <circle cx="20" cy="20" r="7" fill="#a01020"/>
-              <circle cx="20" cy="20" r="3.5" fill="#8a0c18"/>
+              <circle cx="20" cy="20" r="23" fill="#c41830" />
+              <circle cx="20" cy="20" r="18" fill="#d42040" />
+              <circle cx="20" cy="20" r="14" fill="#e02848" />
+              <path d="M20,6 Q25,12 20,20 Q15,12 20,6" fill="#b01428" opacity="0.7" />
+              <path d="M34,20 Q28,15 20,20 Q28,25 34,20" fill="#c41830" opacity="0.7" />
+              <path d="M20,34 Q15,28 20,20 Q25,28 20,34" fill="#c41830" opacity="0.7" />
+              <circle cx="20" cy="20" r="7" fill="#a01020" />
+              <circle cx="20" cy="20" r="3.5" fill="#8a0c18" />
             </g>
           </g>
 
           <!-- Tulip 1 (top right) -->
           <g class="bq-anim" style="--d:0.6s">
             <g transform="translate(175,58)">
-              <ellipse cx="7" cy="20" rx="8" ry="17" fill="#f0a500" transform="rotate(-10 7 20)"/>
-              <ellipse cx="25" cy="20" rx="8" ry="17" fill="#f0a500" transform="rotate(10 25 20)"/>
-              <ellipse cx="16" cy="18" rx="7" ry="18" fill="#ffd700"/>
+              <ellipse cx="7" cy="20" rx="8" ry="17" fill="#f0a500" transform="rotate(-10 7 20)" />
+              <ellipse cx="25" cy="20" rx="8" ry="17" fill="#f0a500" transform="rotate(10 25 20)" />
+              <ellipse cx="16" cy="18" rx="7" ry="18" fill="#ffd700" />
             </g>
           </g>
 
           <!-- Tulip 2 (top left) -->
           <g class="bq-anim" style="--d:0.7s">
             <g transform="translate(82,60)">
-              <ellipse cx="7" cy="20" rx="8" ry="16" fill="#f0a500" transform="rotate(-8 7 20)"/>
-              <ellipse cx="23" cy="20" rx="8" ry="16" fill="#f0a500" transform="rotate(8 23 20)"/>
-              <ellipse cx="15" cy="18" rx="7" ry="17" fill="#ffd700"/>
+              <ellipse cx="7" cy="20" rx="8" ry="16" fill="#f0a500" transform="rotate(-8 7 20)" />
+              <ellipse cx="23" cy="20" rx="8" ry="16" fill="#f0a500" transform="rotate(8 23 20)" />
+              <ellipse cx="15" cy="18" rx="7" ry="17" fill="#ffd700" />
             </g>
           </g>
 
           <!-- Purple flowers (left cluster) -->
           <g class="bq-anim" style="--d:0.9s">
-            <circle cx="55" cy="148" r="6" fill="#b07ed8"/><circle cx="55" cy="148" r="2.2" fill="#f0e0ff"/>
-            <circle cx="46" cy="138" r="5.5" fill="#c896e8"/><circle cx="46" cy="138" r="2" fill="#f0e0ff"/>
-            <circle cx="64" cy="139" r="5" fill="#a070c8"/><circle cx="64" cy="139" r="1.8" fill="#f0e0ff"/>
-            <circle cx="48" cy="158" r="4.5" fill="#c896e8"/><circle cx="48" cy="158" r="1.5" fill="#f0e0ff"/>
-            <circle cx="42" cy="150" r="4" fill="#9868b8"/>
+            <circle cx="55" cy="148" r="6" fill="#b07ed8" />
+            <circle cx="55" cy="148" r="2.2" fill="#f0e0ff" />
+            <circle cx="46" cy="138" r="5.5" fill="#c896e8" />
+            <circle cx="46" cy="138" r="2" fill="#f0e0ff" />
+            <circle cx="64" cy="139" r="5" fill="#a070c8" />
+            <circle cx="64" cy="139" r="1.8" fill="#f0e0ff" />
+            <circle cx="48" cy="158" r="4.5" fill="#c896e8" />
+            <circle cx="48" cy="158" r="1.5" fill="#f0e0ff" />
+            <circle cx="42" cy="150" r="4" fill="#9868b8" />
           </g>
 
           <!-- Purple flowers (right cluster) -->
           <g class="bq-anim" style="--d:1.0s">
-            <circle cx="245" cy="148" r="6" fill="#b07ed8"/><circle cx="245" cy="148" r="2.2" fill="#f0e0ff"/>
-            <circle cx="236" cy="138" r="5.5" fill="#c896e8"/><circle cx="236" cy="138" r="2" fill="#f0e0ff"/>
-            <circle cx="253" cy="140" r="5" fill="#a070c8"/><circle cx="253" cy="140" r="1.8" fill="#f0e0ff"/>
-            <circle cx="250" cy="156" r="4.5" fill="#c896e8"/><circle cx="250" cy="156" r="1.5" fill="#f0e0ff"/>
-            <circle cx="258" cy="150" r="4" fill="#9868b8"/>
+            <circle cx="245" cy="148" r="6" fill="#b07ed8" />
+            <circle cx="245" cy="148" r="2.2" fill="#f0e0ff" />
+            <circle cx="236" cy="138" r="5.5" fill="#c896e8" />
+            <circle cx="236" cy="138" r="2" fill="#f0e0ff" />
+            <circle cx="253" cy="140" r="5" fill="#a070c8" />
+            <circle cx="253" cy="140" r="1.8" fill="#f0e0ff" />
+            <circle cx="250" cy="156" r="4.5" fill="#c896e8" />
+            <circle cx="250" cy="156" r="1.5" fill="#f0e0ff" />
+            <circle cx="258" cy="150" r="4" fill="#9868b8" />
           </g>
 
           <!-- Ribbon bow -->
           <g class="bq-anim" style="--d:0.3s">
-            <path d="M140,270 Q132,300 122,320" stroke="#d4a050" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-            <path d="M160,270 Q168,300 178,320" stroke="#d4a050" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-            <ellipse cx="130" cy="262" rx="18" ry="11" fill="#d4a050" transform="rotate(-15 130 262)"/>
-            <ellipse cx="170" cy="262" rx="18" ry="11" fill="#d4a050" transform="rotate(15 170 262)"/>
-            <circle cx="150" cy="265" r="8" fill="#c49040"/>
-            <circle cx="150" cy="265" r="5" fill="#b48030"/>
+            <path d="M140,270 Q132,300 122,320" stroke="#d4a050" stroke-width="4.5" fill="none"
+              stroke-linecap="round" />
+            <path d="M160,270 Q168,300 178,320" stroke="#d4a050" stroke-width="4.5" fill="none"
+              stroke-linecap="round" />
+            <ellipse cx="130" cy="262" rx="18" ry="11" fill="#d4a050" transform="rotate(-15 130 262)" />
+            <ellipse cx="170" cy="262" rx="18" ry="11" fill="#d4a050" transform="rotate(15 170 262)" />
+            <circle cx="150" cy="265" r="8" fill="#c49040" />
+            <circle cx="150" cy="265" r="5" fill="#b48030" />
           </g>
 
           <!-- Card/Envelope (Clickable) -->
           <g id="bouquet-letter" class="bq-anim bouquet-letter-click" style="--d:0.45s; cursor:pointer;">
             <g transform="translate(165,192) rotate(10)">
               <!-- Glow effect -->
-              <ellipse cx="36" cy="26" rx="38" ry="28" fill="#ffd166" opacity="0.18"/>
-              <!-- Envelope body -->
-              <rect x="0" y="0" width="72" height="52" rx="5" fill="#fff9e6" stroke="#f0a500" stroke-width="2.5"/>
-              <!-- Envelope flap -->
-              <polygon points="0,0 36,24 72,0" fill="#ffe08a" stroke="#f0a500" stroke-width="1.5"/>
+              <ellipse cx="36" cy="26" rx="38" ry="28" fill="#ffd166" opacity="0.18" />
+
+              <!-- Envelope Back -->
+              <rect x="0" y="0" width="72" height="52" rx="5" fill="#e6cd8a" stroke="#f0a500" stroke-width="2.5" />
+
+              <!-- Letter paper -->
+              <g class="env-paper">
+                <rect x="8" y="10" width="56" height="38" rx="2" fill="#ffffff" stroke="#ccc" stroke-width="0.5" />
+                <line x1="16" y1="20" x2="40" y2="20" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" />
+                <line x1="16" y1="26" x2="56" y2="26" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" />
+                <line x1="16" y1="32" x2="48" y2="32" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" />
+              </g>
+
+              <!-- Envelope Front -->
+              <path d="M 0,0 L 36,26 L 72,0 L 72,47 Q 72,52 67,52 L 5,52 Q 0,52 0,47 Z" fill="#fff9e6" stroke="#f0a500"
+                stroke-width="2.5" stroke-linejoin="round" />
+
               <!-- Envelope bottom fold line -->
-              <polygon points="0,52 36,30 72,52" fill="#fff3c4" stroke="#f0a500" stroke-width="1"/>
-              <!-- Heart seal on flap -->
-              <text x="36" y="22" text-anchor="middle" font-size="12" fill="#e03050">&#9829;</text>
+              <polygon points="0,52 36,30 72,52" fill="#fff3c4" stroke="#f0a500" stroke-width="1"
+                stroke-linejoin="round" />
+
+              <!-- Envelope flap (animated) -->
+              <g class="env-flap">
+                <polygon points="0,0 36,24 72,0" fill="#ffe08a" stroke="#f0a500" stroke-width="1.5"
+                  stroke-linejoin="round" />
+                <!-- Heart seal on flap -->
+                <text class="env-seal" x="36" y="21" text-anchor="middle" font-size="12" fill="#e03050">&#9829;</text>
+              </g>
+
               <!-- To You text -->
-              <text x="36" y="39" text-anchor="middle" font-family="'Dancing Script', cursive" font-size="13" fill="#c47a00" font-weight="700">To You</text>
+              <text class="env-text" x="36" y="40" text-anchor="middle" font-family="'Dancing Script', cursive"
+                font-size="13" fill="#c47a00" font-weight="700">To You</text>
             </g>
           </g>
         </svg>
@@ -243,20 +298,34 @@
         <div class="photo-card state-top pc-1">
           <div class="photo-tape"></div>
           <div class="photo-zoom-btn">🔍</div>
-          <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=800&h=800&fit=crop" alt="memory">
-          <p class="photo-caption">Our very first sunset together <span class="photo-flower">🌸</span></p>
+          <img src="assets/images/1000290595.jpg" alt="memory" loading="lazy" decoding="async">
+          <p class="photo-caption">Our first photo together <span class="photo-flower">🌸</span></p>
         </div>
         <div class="photo-card state-mid pc-2">
           <div class="photo-tape"></div>
           <div class="photo-zoom-btn">🔍</div>
-          <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&h=800&fit=crop" alt="memory">
-          <p class="photo-caption">Our favourite café in the corner of the city <span class="photo-flower">🌸</span></p>
+          <img src="assets/images/1000310518.jpg" alt="memory" loading="lazy" decoding="async">
+          <p class="photo-caption">The first time we hung out <span class="photo-flower">🌸</span></p>
         </div>
         <div class="photo-card state-bot pc-3">
           <div class="photo-tape"></div>
           <div class="photo-zoom-btn">🔍</div>
-          <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800&h=800&fit=crop" alt="memory">
-          <p class="photo-caption">First time at the beach, just the two of us <span class="photo-flower">🌸</span></p>
+          <img src="assets/images/1000310619.jpg" alt="memory" loading="lazy" decoding="async">
+          <p class="photo-caption">The most memorable moment we shared when we went out. <span
+              class="photo-flower">🌸</span></p>
+        </div>
+        <div class="photo-card state-hidden pc-4">
+          <div class="photo-tape"></div>
+          <div class="photo-zoom-btn">🔍</div>
+          <img src="assets/images/1000317958.jpg" alt="memory" loading="lazy" decoding="async">
+          <p class="photo-caption">The very first movie we watched together at the cinema. <span
+              class="photo-flower">🌸</span></p>
+        </div>
+        <div class="photo-card state-hidden pc-5">
+          <div class="photo-tape"></div>
+          <div class="photo-zoom-btn">🔍</div>
+          <img src="assets/images/1000318071.jpg" alt="memory" loading="lazy" decoding="async">
+          <p class="photo-caption">You and me, forever and always <span class="photo-flower">🌸</span></p>
         </div>
       </div>
       <p class="photo-tip">💡 tap foto untuk ganti, atau klik 🔍 untuk perbesar</p>
@@ -290,10 +359,10 @@
       <h2 class="section-title">aku juga sayang kamu! 💕</h2>
       <p class="reasons-sub">hal yang aku suka dari kamu:</p>
       <ul class="reasons-list" id="reasons-list">
-        <li>senyum kamu yang bikin hari aku cerah ☀️</li>
-        <li>cara kamu ketawa yang bikin aku ikut ketawa 😆</li>
-        <li>perhatian kecil kamu yang berarti banget 🌸</li>
-        <li>kamu selalu tau cara bikin aku tenang 🤍</li>
+        <li>senyum kamuuu yang maniss bangettt 😆</li>
+        <li>Imoett, Gemesein, lucuu bangett pinginn aku cubitt 🤏</li>
+        <li>cara kamu selalu notice hal-hal kecil tentang aku yang kadang aku sendiri gak sadar 🥺✨</li>
+        <li>Kamu bisa selalu bikin aku nyaman 🤍</li>
         <li>kamu tuh segalanya buat aku 💖</li>
       </ul>
       <button id="btn-next4" class="btn-main reveal-btn">lanjut →</button>
@@ -321,23 +390,25 @@
         Pejamkan mata, make a wish dalam hati... 🤫
         <span class="cake-hint">👇 tap/sentuh api lilin untuk meniupnya!</span>
       </p>
-      
+
       <div class="cake-container" id="cake-container">
         <svg viewBox="0 0 200 200" class="cake-svg">
           <!-- Plate Stand Pedestal -->
           <path d="M85,162 L115,162 L110,175 L90,175 Z" fill="#ccc" />
           <!-- Plate -->
           <ellipse cx="100" cy="162" rx="75" ry="10" fill="#e5e5e5" stroke="#d5d5d5" stroke-width="0.8" />
-          
+
           <!-- Cake Base Layer (Chocolate) -->
           <path d="M50,110 L150,110 L150,154 A50,8 0 0,1 50,154 Z" fill="#4f2f1d" />
-          
+
           <!-- Strawberry Cream Layer in the middle -->
           <path d="M50,132 L150,132 L150,138 A50,2 0 0,1 50,138 Z" fill="#ffb5a7" />
-          
+
           <!-- Top Dripping Chocolate Frosting -->
-          <path d="M50,110 A50,6 0 0,1 150,110 L150,122 Q142,128 135,122 Q127,116 120,122 Q112,128 105,122 Q97,116 90,122 Q82,128 75,122 Q67,116 60,122 L50,116 Z" fill="#2b170c" />
-          
+          <path
+            d="M50,110 A50,6 0 0,1 150,110 L150,122 Q142,128 135,122 Q127,116 120,122 Q112,128 105,122 Q97,116 90,122 Q82,128 75,122 Q67,116 60,122 L50,116 Z"
+            fill="#2b170c" />
+
           <!-- Sprinkles on Top -->
           <rect x="65" y="114" width="2" height="5" rx="0.8" fill="#ffd166" transform="rotate(30 65 114)" />
           <rect x="85" y="112" width="2" height="5" rx="0.8" fill="#06d6a0" transform="rotate(-20 85 112)" />
@@ -346,27 +417,31 @@
           <circle cx="100" cy="113" r="1.5" fill="#fff" />
           <circle cx="75" cy="116" r="1.5" fill="#ef476f" />
           <circle cx="125" cy="116" r="1.5" fill="#06d6a0" />
-          
+
           <!-- Left Cherry -->
           <circle cx="70" cy="106" r="6" fill="#d00000" />
           <path d="M70,106 Q73,98 68,92" stroke="#495057" stroke-width="1" fill="none" />
-          
+
           <!-- Right Cherry -->
           <circle cx="130" cy="106" r="6" fill="#d00000" />
           <path d="M130,106 Q133,98 128,92" stroke="#495057" stroke-width="1" fill="none" />
-          
+
           <!-- Candle -->
           <rect x="97" y="65" width="6" height="42" fill="#ffd166" rx="1" />
           <!-- Stripes on candle -->
           <path d="M97,72 L103,75 M97,82 L103,85 M97,92 L103,95" stroke="#ef476f" stroke-width="1.8" />
-          
+
           <!-- Flame -->
-          <path id="candle-flame" class="flame" d="M100,45 Q105,55 100,65 Q95,55 100,45" fill="#ffb703" cursor="pointer" />
+          <path id="candle-flame" class="flame" d="M100,45 Q105,55 100,65 Q95,55 100,45" fill="#ffb703"
+            cursor="pointer" />
+          <!-- Invisible large hitbox for touch/click ease -->
+          <circle id="flame-hitbox" cx="100" cy="55" r="30" fill="transparent" cursor="pointer" />
           <!-- Smoke (hidden initially) -->
-          <path id="candle-smoke" class="smoke hidden" d="M100,58 Q97,48 103,38 Q100,33 100,28" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" />
+          <path id="candle-smoke" class="smoke hidden" d="M100,58 Q97,48 103,38 Q100,33 100,28" fill="none"
+            stroke="#ccc" stroke-width="2" stroke-linecap="round" />
         </svg>
       </div>
-      
+
       <button id="btn-next-cake" class="btn-main reveal-btn">Next →</button>
     </div>
   </section>
@@ -377,9 +452,8 @@
       <p class="final-emoji">🎉</p>
       <h1 class="final-title">Happy Birthday<br>Sayangku!</h1>
       <p class="final-msg">
-        Semoga di umur yang bertambah ini, kamu makin bahagia, selalu sehat, dan semua doa dan impian mu terkabul. 
-        Makasih udah jadi bagian terindah di hidupku. Nanti saat kita keluar bareng masih ada kejutan lagi nantikan saja😊 
-        I love you! 💕
+        Semoga di umur yang bertambah ini, kamu makin bahagia, selalu sehat, dan semua doa dan impian mu terkabul.
+        Makasih udah jadi bagian terindah di hidupku. I love you! 💕
       </p>
       <p class="final-sign">— from someone who loves you 🤍</p>
     </div>
@@ -398,14 +472,15 @@
     </div>
     <button id="mp-toggle" class="mp-control-btn" aria-label="Toggle music">
       <svg id="mp-icon-pause" class="mp-svg-icon" viewBox="0 0 24 24" width="16" height="16">
-        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="#fff"/>
+        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="#fff" />
       </svg>
       <svg id="mp-icon-play" class="mp-svg-icon hidden" viewBox="0 0 24 24" width="16" height="16">
-        <path d="M8 5v14l11-7z" fill="#fff"/>
+        <path d="M8 5v14l11-7z" fill="#fff" />
       </svg>
     </button>
   </div>
 
   <script src="logik.js"></script>
 </body>
+
 </html>

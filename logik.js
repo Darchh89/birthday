@@ -18,28 +18,34 @@ const CONFIG = {
       jawaban: 1 // Kamu
     },
     {
-      tanya: "Apa makanan favorit aku? 🍛",
-      opsi: ["Seblak Pedes 🍜", "Semua yang gratisan 😂", "Ayam Geprek 🍗"],
+      tanya: "Apa minuman favorit aku? 🍵",
+      opsi: ["Mochachino", "Americano ", "Es teh"],
       jawaban: 1 // Semua yang gratisan
     },
     {
-      tanya: "Tanggal berapa kita jadian? 📅",
-      opsi: ["10 Oktober", "12 Desember", "Setiap hari kan sayang terus 🥰"],
+      tanya: "Tanggal berapa aku mulai intens deketinn kamu? 📅",
+      opsi: ["3 November", "1 Oktober", "Ga tau lupa 😅"],
       jawaban: 2 // Setiap hari kan sayang terus
+    },
+    {
+      tanya: "Tempat favorit pertama kita jalan? 🚶‍♀️",
+      opsi: ["Emmm apaa yaa", "Malangg", "Batuu"],
+      jawaban: 2 // Di hatimu aja deh
+    },
+    {
+      tanya: "Panggilan sayang kamu buat aku? 🤭",
+      opsi: ["Beb 🦆", "Darling", "Milopp ❤️"],
+      jawaban: 2 // Sayangku
     }
   ],
 
   // Isi surat — tulis sesuka hati kamu
   surat: `My dearest Dara... 💕
 
-Aku cuma mau bilang, selamat ulang tahun ya! Di hari spesial ini, aku bersyukur banget bisa kenal kamu dan jadi bagian dari hidupmu.
-
-Makasih udah selalu ada, selalu sabar, dan selalu bikin hari-hariku jadi lebih berwarna. Kamu tuh orang yang paling berarti buat aku.
-
-Semoga di umur yang baru, semua mimpi kamu tercapai, selalu sehat, dan makin bahagia. Aku sayang kamu! 🤍`,
+Sayang, selamat ulang tahun ya! 🤍 Di hari spesial ini, aku cuma mau bilang betapa bersyukurnya aku bisa kenal dan punya kamu di hidupku. Makasih ya udah selalu ada, selalu sabar ngadepin kelemotan aku, dan selalu makasih udah bikin hari-hariku jauh lebih berwarna. Kamu harus tau kalau kamu tuh orang yang paling berarti buat aku sekarang. Semoga di umur yang baru ini, semua mimpi kamu pelan-pelan tercapai, sehat selalu, dan makin bahagia. Kurang-kurangin OVT-nya yaa, kan juga udah aku sepenuhnya milik kamu. Aku sayang banget sama kamu`
 
   // Pesan akhir di halaman terakhir
-  pesanAkhir: `Semoga di umur yang baru ini, kamu makin bahagia, sehat selalu, dan semua doamu terkabul. Makasih udah jadi bagian terindah di hidupku. I love you! 💕`
+  pesanAkhir: `Semoga di umur yang bertambah ini, kamu makin bahagia, sehat selalu, dan semua doamu terkabul. Makasih udah jadi bagian terindah di hidupku. Btw masih ada kejutan lagi loh tapi nanti pas kita ketemu yaaa. I love you! 💕`
 };
 
 /* ==========================================
@@ -61,6 +67,7 @@ const pages = {
 };
 
 const audio = document.getElementById('bg-music');
+const boomSound = new Audio('assets/audio/boom.mp3');
 
 // --- Update dynamic content ---
 document.querySelector('.greeting-date').textContent = CONFIG.tanggal;
@@ -70,7 +77,7 @@ document.querySelector('.final-msg').textContent = CONFIG.pesanAkhir;
 function goTo(from, to) {
   from.classList.add('leaving');
   to.classList.add('active');
-  
+
   // re-trigger animation
   const inner = to.querySelector('.page-inner');
   if (inner) {
@@ -84,7 +91,7 @@ function goTo(from, to) {
     coverInner.offsetHeight; // force reflow
     coverInner.style.animation = '';
   }
-  
+
   setTimeout(() => {
     from.classList.remove('active');
     from.classList.remove('leaving');
@@ -100,7 +107,7 @@ function resize() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 }
-window.addEventListener('resize', resize);
+window.addEventListener('resize', resize, { passive: true });
 resize();
 
 class Heart {
@@ -148,20 +155,28 @@ let lastFrame = 0;
 const frameInterval = isMobile ? 40 : 25; // ~25fps mobile, ~40fps desktop
 
 // --- Unified Canvas Animation Loop ---
+let isPageVisible = true;
+document.addEventListener('visibilitychange', () => {
+  isPageVisible = !document.hidden;
+});
+
 function animateCanvas(timestamp) {
   requestAnimationFrame(animateCanvas);
-  
+
+  // Pause rendering when tab is hidden (saves battery)
+  if (!isPageVisible) return;
+
   if (timestamp - lastFrame < frameInterval) return;
   lastFrame = timestamp;
-  
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
+
   // 1. Draw background hearts
   hearts.forEach(h => {
     h.update();
     h.draw();
   });
-  
+
   // 2. Draw confetti (if any)
   if (confetti.length > 0) {
     confetti = confetti.filter(c => {
@@ -170,7 +185,7 @@ function animateCanvas(timestamp) {
       c.y += c.vy;
       c.vx *= 0.98;
       c.opacity -= 0.015;
-      
+
       ctx.save();
       ctx.globalAlpha = Math.max(0, c.opacity);
       ctx.fillStyle = c.color;
@@ -183,7 +198,7 @@ function animateCanvas(timestamp) {
       ctx.bezierCurveTo(c.x + s * 0.5, c.y, c.x, c.y, c.x, c.y + s * 0.3);
       ctx.fill();
       ctx.restore();
-      
+
       return c.opacity > 0;
     });
   }
@@ -195,7 +210,7 @@ let confetti = [];
 function burstConfetti(cx, cy, count) {
   const colors = ['#f0a0b0', '#ffd6e0', '#fff', '#ffb3c6', '#c9184a'];
   const actualCount = isMobile ? Math.floor(count * 0.6) : count;
-  
+
   for (let i = 0; i < actualCount; i++) {
     const angle = Math.random() * Math.PI * 2;
     const speed = Math.random() * 5 + 2;
@@ -216,11 +231,22 @@ const btnOpen = document.getElementById('btn-open');
 const giftBox = document.getElementById('gift-box');
 
 function openGift() {
-  audio.play().catch(() => {});
+  audio.play().catch(() => { });
   giftBox.classList.add('open');
   btnOpen.style.transition = 'opacity 0.6s ease';
   btnOpen.style.opacity = '0';
   btnOpen.style.pointerEvents = 'none';
+
+  // Play boom sound exactly when the image pops out (matches 0.3s CSS transition delay)
+  setTimeout(() => {
+    boomSound.play().catch(() => { });
+  }, 300);
+
+  // Fade out the photo separately
+  setTimeout(() => {
+    const boxMessage = document.querySelector('.box-message');
+    if (boxMessage) boxMessage.classList.add('fade-out');
+  }, 1500);
 
   // Reveal floating music player
   document.getElementById('music-player').classList.remove('hidden');
@@ -237,32 +263,56 @@ function openGift() {
     burstConfetti(boxX, boxY - 40, 20);
   }, 400);
 
-  // Transition to greeting page after 1.2s CSS transition completes fully
+  // Gift box scales up and fades out after text floats up
+  setTimeout(() => {
+    giftBox.classList.add('transitioning');
+  }, 2000);
+
+  // Transition to greeting page
   setTimeout(() => {
     goTo(pages.cover, pages.greeting);
     typeText(document.getElementById('greeting-name'), CONFIG.nama, 120, () => {
       document.getElementById('btn-next1').classList.add('show');
     });
-  }, 1200);
+  }, 2600);
 }
 
 btnOpen.addEventListener('click', openGift);
 giftBox.addEventListener('click', openGift);
 
-// --- Typing Effect ---
+let typingTimer = null;
+
 function typeText(el, text, speed, callback) {
   let i = 0;
   el.textContent = '';
+  if (typingTimer) clearTimeout(typingTimer);
   function type() {
     if (i < text.length) {
       el.textContent += text[i];
       i++;
-      setTimeout(type, speed);
-    } else if (callback) {
-      callback();
+      typingTimer = setTimeout(type, speed);
+    } else {
+      typingTimer = null;
+      if (callback) callback();
     }
   }
   type();
+}
+
+const letterBox = document.querySelector('.letter-box');
+if (letterBox) {
+  letterBox.addEventListener('click', () => {
+    const letterEl = document.getElementById('typed-letter');
+    const cursorEl = document.getElementById('cursor');
+    const nextBtn = document.getElementById('btn-next2');
+    if (letterEl && letterEl.textContent.length < CONFIG.surat.length) {
+      if (typingTimer) clearTimeout(typingTimer);
+      typingTimer = null;
+      letterEl.textContent = CONFIG.surat;
+      if (cursorEl) cursorEl.style.display = 'none';
+      if (nextBtn) nextBtn.classList.add('show');
+    }
+  });
 }
 
 // --- STAGE 2: Greeting → Bouquet ---
@@ -273,13 +323,19 @@ document.getElementById('btn-next1').addEventListener('click', () => {
 // --- STAGE 7: Bouquet Letter Click → Letter ---
 document.getElementById('bouquet-letter').addEventListener('click', () => {
   const letter = document.getElementById('bouquet-letter');
-  
-  // Play a quick pop animation before transitioning
-  letter.style.transition = 'transform 0.15s ease';
-  letter.style.transform = 'scale(1.25)';
-  setTimeout(() => { letter.style.transform = 'scale(0.9)'; }, 150);
-  setTimeout(() => { letter.style.transform = 'scale(1)'; }, 280);
-  
+
+  // Disable multiple clicks
+  letter.style.pointerEvents = 'none';
+
+  // Add opened class to trigger CSS animation
+  letter.classList.add('opened');
+
+  // Play a quick pop animation for the whole envelope
+  letter.style.transition = 'transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+  letter.style.transform = 'scale(1.15)';
+  setTimeout(() => { letter.style.transform = 'scale(1)'; }, 200);
+
+  // Wait for the envelope opening animation to finish before page transition
   setTimeout(() => {
     goTo(pages.bouquet, pages.letter);
     // start typing letter
@@ -289,46 +345,69 @@ document.getElementById('bouquet-letter').addEventListener('click', () => {
       cursorEl.style.display = 'none';
       document.getElementById('btn-next2').classList.add('show');
     });
-  }, 350);
+  }, 1000);
 });
 
 // --- STAGE 3: Letter → Memories ---
 document.getElementById('btn-next2').addEventListener('click', () => {
   const loader = document.getElementById('loader');
   const particles = document.getElementById('particles');
+
+  // ⚡ Preload all memory images NOW during loading screen
+  // so they're already in cache when the page appears (no decode lag)
+  const memorySrcs = [
+    'assets/images/1000290595.jpg',
+    'assets/images/1000310518.jpg',
+    'assets/images/1000310619.jpg',
+    'assets/images/1000317958.jpg',
+    'assets/images/1000318071.jpg'
+  ];
+  memorySrcs.forEach(src => {
+    const pre = new Image();
+    pre.src = src;
+  });
+
   if (loader) {
     // 1. Prepare loader text, solid background, and put canvas particles on top of it
     loader.querySelector('.loader-text').innerHTML = 'memuat kenangan manis... <span style="display:inline-block; animation: spinFlower 2.5s linear infinite;">🌸</span>';
     loader.classList.add('solid-bg');
     loader.style.display = 'flex';
     if (particles) particles.classList.add('on-top');
-    
+
     // Force a CSS reflow
     loader.offsetHeight;
-    
+
     // 2. Fade in the loader
     loader.classList.remove('fade-out');
-    
+
     // 3. Wait for 2.0 seconds, transition page, and fade out loader
     setTimeout(() => {
+      // Transition the page first
       goTo(pages.letter, pages.memories);
-      revealMemories();
-      
-      // Fade out loader again
-      loader.classList.add('fade-out');
-      
+
+      // ⚡ Wait for page slide animation to finish (550ms) THEN reveal photos
+      // This prevents doing too many things at the same time
+      setTimeout(() => {
+        revealMemories();
+      }, 480);
+
+      // Fade out loader after a short delay so it doesn't compete with page transition
+      setTimeout(() => {
+        loader.classList.add('fade-out');
+      }, 300);
+
       // Fully hide the loader and reset its settings after fade-out transition
       setTimeout(() => {
         loader.style.display = 'none';
         loader.classList.remove('solid-bg');
         if (particles) particles.classList.remove('on-top');
         loader.querySelector('.loader-text').textContent = 'preparing something special for you...';
-      }, 800);
+      }, 1100);
     }, 2000);
   } else {
     // Fallback if loader is not found
     goTo(pages.letter, pages.memories);
-    revealMemories();
+    setTimeout(() => revealMemories(), 480);
   }
 });
 
@@ -373,10 +452,25 @@ const quizArea = document.getElementById('quiz-area');
 
 function dodgeButton() {
   const area = quizArea.getBoundingClientRect();
-  const maxX = area.width - btnNo.offsetWidth - 10;
-  const maxY = area.height - btnNo.offsetHeight - 10;
-  const rx = Math.max(10, Math.random() * maxX);
-  const ry = Math.max(10, Math.random() * maxY);
+  const yesBtn = document.getElementById('btn-yes');
+  const yesRect = yesBtn.getBoundingClientRect();
+
+  const maxX = Math.max(10, area.width - btnNo.offsetWidth - 10);
+  const maxY = Math.max(10, area.height - btnNo.offsetHeight - 10);
+
+  let rx = 10, ry = 10;
+  let attempts = 0;
+
+  do {
+    rx = Math.max(10, Math.random() * maxX);
+    ry = Math.max(10, Math.random() * maxY);
+    attempts++;
+  } while (
+    attempts < 12 &&
+    Math.abs(rx - (yesRect.left - area.left)) < 110 &&
+    Math.abs(ry - (yesRect.top - area.top)) < 55
+  );
+
   btnNo.style.position = 'absolute';
   btnNo.style.left = rx + 'px';
   btnNo.style.top = ry + 'px';
@@ -386,7 +480,7 @@ btnNo.addEventListener('mouseover', dodgeButton);
 btnNo.addEventListener('touchstart', (e) => {
   e.preventDefault();
   dodgeButton();
-});
+}, { passive: false });
 btnNo.addEventListener('click', (e) => {
   e.preventDefault();
   dodgeButton();
@@ -400,7 +494,7 @@ function startKuis() {
   currentKuisIndex = 0;
   kuisScore = 0;
   document.getElementById('rq-emoji').textContent = "🤔";
-  document.getElementById('rq-title').textContent = "Kuis Hubungan Kita 💕";
+  document.getElementById('rq-title').textContent = "Kuis Tentang Kita 💕";
   loadKuisQuestion();
 }
 
@@ -467,7 +561,7 @@ function showKuisResult() {
   if (kuisScore === CONFIG.kuis.length) {
     document.getElementById('rq-emoji').textContent = "🎉🏆";
     document.getElementById('rq-title').textContent = "Skor Kamu Sempurna! 💯";
-    questionEl.textContent = "Luar biasa! Kamu ingat semua detail hubungan kita. Aku makin sayang sama kamu! 🥰💕";
+    questionEl.textContent = "Ihh inget aku makin sayang sama kamu! 🥰💕";
 
     // burst massive confetti
     for (let i = 0; i < 4; i++) {
@@ -482,7 +576,7 @@ function showKuisResult() {
 
     const nextBtn = document.createElement('button');
     nextBtn.className = 'btn-main';
-    nextBtn.textContent = 'Lanjut →';
+    nextBtn.textContent = 'Next →';
     nextBtn.addEventListener('click', () => {
       goTo(pages.relationQuiz, pages.blowCake);
       resetCandle();
@@ -513,10 +607,10 @@ setTimeout(() => {
       const loader = document.getElementById('loader');
       if (loader) {
         loader.classList.add('fade-out');
-        
+
         // Show Cover page (Stage 1)
         pages.cover.classList.add('active');
-        
+
         // Force reflow/reset of cover-content animations
         const coverInner = pages.cover.querySelector('.cover-content');
         if (coverInner) {
@@ -524,7 +618,7 @@ setTimeout(() => {
           coverInner.offsetHeight; // force reflow
           coverInner.style.animation = '';
         }
-        
+
         clearInterval(checkInterval);
         setTimeout(() => {
           loader.style.display = 'none';
@@ -551,13 +645,20 @@ cards.forEach(card => {
 
     // Only cycle if this card is currently the top card AND not already animating
     if (!card.classList.contains('state-top') || card.classList.contains('swipe')) return;
-    
+
     const midCard = document.querySelector('.photo-card.state-mid');
     const botCard = document.querySelector('.photo-card.state-bot');
-    
+    const hiddenCards = document.querySelectorAll('.photo-card.state-hidden');
+
+    // ⚡ Zero out transition delays on ALL moving cards so they animate instantly
+    [card, midCard, botCard, hiddenCards[0]].forEach(c => {
+      if (c) c.style.transitionDelay = '0s';
+    });
+
     // Swipe out the top card
     card.classList.add('swipe');
-    
+    card.classList.remove('state-top');
+
     // Shift middle to top, bottom to middle
     if (midCard) {
       midCard.classList.remove('state-mid');
@@ -567,12 +668,27 @@ cards.forEach(card => {
       botCard.classList.remove('state-bot');
       botCard.classList.add('state-mid');
     }
-    
-    // After swipe out finishes, make this card the bottom card
+
+    // If there are hidden cards, promote the first one to bot
+    if (hiddenCards.length > 0) {
+      hiddenCards[0].classList.remove('state-hidden');
+      hiddenCards[0].classList.add('state-bot');
+    }
+
+    // After swipe out finishes, recycle this card back into the deck
     setTimeout(() => {
-      card.classList.remove('state-top');
-      card.classList.add('state-bot');
       card.classList.remove('swipe');
+      card.style.transitionDelay = ''; // clean up inline style
+
+      const totalCards = document.querySelectorAll('.photo-card').length;
+      if (totalCards > 3) {
+        card.classList.add('state-hidden');
+      } else {
+        card.classList.add('state-bot');
+      }
+
+      // Move to end of DOM so next query gets the right first hidden card
+      card.parentNode.appendChild(card);
     }, 450);
   });
 
@@ -581,10 +697,10 @@ cards.forEach(card => {
   if (zoomBtn) {
     zoomBtn.addEventListener('click', (e) => {
       e.stopPropagation(); // prevent card click
-      
+
       const img = card.querySelector('img');
       const caption = card.querySelector('.photo-caption');
-      
+
       if (img && lightbox && lightboxImg && lightboxCaption) {
         lightboxImg.src = img.src;
         lightboxCaption.innerHTML = caption ? caption.innerHTML : '';
@@ -610,11 +726,21 @@ if (lightbox) {
   });
 }
 
+// Close Lightbox on Escape key press
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && lightbox && lightbox.style.display === 'block') {
+    lightbox.style.display = 'none';
+  }
+});
+
 // --- Trigger Polaroid Stagger Entrance ---
 function revealMemories() {
   const cards = document.querySelectorAll('.photo-card');
-  cards.forEach(card => {
-    card.classList.add('show');
+  cards.forEach((card, i) => {
+    // Give each card a staggered delay so they glide in one by one
+    setTimeout(() => {
+      card.classList.add('show');
+    }, 200 + i * 280);
   });
 }
 
@@ -626,16 +752,23 @@ const mpIconPause = document.getElementById('mp-icon-pause');
 
 mpToggle.addEventListener('click', () => {
   if (audio.paused) {
-    audio.play().catch(() => {});
-    mpDisc.classList.remove('paused');
-    mpIconPlay.classList.add('hidden');
-    mpIconPause.classList.remove('hidden');
+    audio.play().catch(() => { });
   } else {
     audio.pause();
-    mpDisc.classList.add('paused');
-    mpIconPlay.classList.remove('hidden');
-    mpIconPause.classList.add('hidden');
   }
+});
+
+// Keep music player UI strictly synced with actual audio element events
+audio.addEventListener('play', () => {
+  if (mpDisc) mpDisc.classList.remove('paused');
+  if (mpIconPlay) mpIconPlay.classList.add('hidden');
+  if (mpIconPause) mpIconPause.classList.remove('hidden');
+});
+
+audio.addEventListener('pause', () => {
+  if (mpDisc) mpDisc.classList.add('paused');
+  if (mpIconPlay) mpIconPlay.classList.remove('hidden');
+  if (mpIconPause) mpIconPause.classList.add('hidden');
 });
 
 // --- STAGE 5.8: Virtual Blow Cake Logic ---
@@ -654,33 +787,45 @@ function resetCandle() {
   btnNextCake.classList.remove('show');
 }
 
-flame.addEventListener('click', blowCandle);
-flame.addEventListener('touchstart', (e) => {
-  e.preventDefault();
-  blowCandle();
-});
+const flameHitbox = document.getElementById('flame-hitbox');
+
+if (flame) {
+  flame.addEventListener('click', blowCandle);
+  flame.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    blowCandle();
+  }, { passive: false });
+}
+
+if (flameHitbox) {
+  flameHitbox.addEventListener('click', blowCandle);
+  flameHitbox.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    blowCandle();
+  }, { passive: false });
+}
 
 function blowCandle() {
   if (isCandleBlown) return;
   isCandleBlown = true;
-  
+
   // Extinguish flame
   flame.classList.add('extinguished');
-  
+
   // Trigger smoke puff
   smoke.classList.remove('hidden');
   smoke.classList.add('active');
-  
+
   // Visual pop / confetti
   burstConfetti(window.innerWidth / 2, window.innerHeight * 0.45, 30);
-  
+
   // Success message
   cakeInstruction.style.opacity = '0';
   setTimeout(() => {
     cakeInstruction.innerHTML = "Yeeayy! Semoga semua keinginanmu dikabulkan ya sayang... 🤍";
     cakeInstruction.style.opacity = '1';
   }, 300);
-  
+
   // Reveal next button
   setTimeout(() => {
     btnNextCake.classList.add('show');

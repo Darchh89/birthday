@@ -181,11 +181,12 @@ body {
   perspective: 800px;
   cursor: pointer;
   z-index: 10;
+  overflow: visible;
   animation: float3D 3s ease-in-out infinite alternate;
 }
 
 @keyframes float3D {
-  0% { transform: translateY(0); }
+  0%   { transform: translateY(0px); }
   100% { transform: translateY(-10px); }
 }
 
@@ -204,8 +205,8 @@ body {
 }
 
 @keyframes wobble3d {
-  0% { transform: rotateX(-22deg) rotateY(35deg) scale3d(1.04, 1.04, 1.04); }
-  100% { transform: rotateX(-18deg) rotateY(55deg) scale3d(1.04, 1.04, 1.04); }
+  0%   { transform: rotateX(-22deg) rotateY(35deg) scale3d(1.04, 1.04, 1.04) translateZ(0); }
+  100% { transform: rotateX(-18deg) rotateY(55deg) scale3d(1.04, 1.04, 1.04) translateZ(0); }
 }
 
 /* General face settings */
@@ -215,7 +216,7 @@ body {
   backface-visibility: visible;
 }
 
-/* Box Body — deep charcoal */
+/* Box Body — Red Exterior */
 .box-body {
   position: absolute;
   width: 100px;
@@ -228,9 +229,9 @@ body {
 
 .body-face {
   position: absolute;
-  background: rgba(253, 251, 247, 0.95); /* cream */
+  background: #d4a5a5; /* dusty rose exterior */
   border: 1.5px solid rgba(61, 13, 28, 0.1);
-  box-shadow: inset 0 0 15px rgba(0,0,0,0.06);
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.15);
 }
 
 .body-front, .body-back {
@@ -251,14 +252,41 @@ body {
 .body-back   { transform: rotateY(180deg) translateZ(50px); }
 .body-left   { transform: rotateY(-90deg) translateZ(50px); }
 .body-right  { transform: rotateY( 90deg) translateZ(50px); }
-.body-bottom { transform: translateY(35px) rotateX(90deg); background: #eee; }
+.body-bottom { transform: translateY(35px) rotateX(90deg); background: #c29393; }
 
-/* Ribbon on body faces */
+/* Inside faces styling (cream interior) */
+.body-face-in {
+  position: absolute;
+  background: #faf5eb; /* cream */
+  border: 1.5px solid #c29393;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.06);
+}
+
+.body-front-in, .body-back-in {
+  width: 98px;
+  height: 83px;
+}
+.body-left-in, .body-right-in {
+  width: 98px;
+  height: 83px;
+}
+.body-bottom-in {
+  width: 98px;
+  height: 98px;
+}
+
+.body-front-in  { transform: rotateY(180deg) translateZ(48.5px) translateY(1px); }
+.body-back-in   { transform: rotateY(  0deg) translateZ(48.5px) translateY(1px); }
+.body-left-in   { transform: rotateY( 90deg) translateZ(48.5px) translateY(1px); }
+.body-right-in  { transform: rotateY(-90deg) translateZ(48.5px) translateY(1px); }
+.body-bottom-in { transform: translateY(33.5px) rotateX(-90deg) translateX(1px); background: #fdfbf7; }
+
+/* Ribbon on body faces (Champagne ribbon) */
 .body-face::before {
   content: '';
   position: absolute;
-  background: #e03050;
-  box-shadow: 0 0 5px rgba(0,0,0,0.08);
+  background: #e3c48d;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 .body-front::before, .body-back::before, .body-left::before, .body-right::before {
   top: 0;
@@ -267,7 +295,7 @@ body {
   height: 100%;
 }
 
-/* Box Lid — deep burgundy */
+/* Box Lid — Red Exterior */
 .box-lid {
   position: absolute;
   width: 106px;
@@ -281,9 +309,9 @@ body {
 
 .lid-face {
   position: absolute;
-  background: #e03050; /* hot rose red lid */
+  background: #d4a5a5; /* dusty rose exterior */
   border: 1px solid rgba(0,0,0,0.15);
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.15);
 }
 
 .lid-front, .lid-back {
@@ -305,11 +333,37 @@ body {
 .lid-right { transform: rotateY( 90deg) translateZ(53px); }
 .lid-top   { transform: translateY(-53px) rotateX(90deg); }
 
-/* Ribbon on Lid top */
+/* Inside faces of the lid */
+.lid-face-in {
+  position: absolute;
+  background: #faf5eb; /* cream */
+  border: 1px solid #c29393;
+}
+
+.lid-front-in, .lid-back-in {
+  width: 104px;
+  height: 18px;
+}
+.lid-left-in, .lid-right-in {
+  width: 104px;
+  height: 18px;
+}
+.lid-bottom-in {
+  width: 104px;
+  height: 104px;
+}
+
+.lid-front-in  { transform: rotateY(180deg) translateZ(51.5px) translateY(1px); }
+.lid-back-in   { transform: rotateY(  0deg) translateZ(51.5px) translateY(1px); }
+.lid-left-in   { transform: rotateY( 90deg) translateZ(51.5px) translateY(1px); }
+.lid-right-in  { transform: rotateY(-90deg) translateZ(51.5px) translateY(1px); }
+.lid-bottom-in { transform: translateY(-51.5px) rotateX(-90deg) translateX(1px); background: #fdfbf7; }
+
+/* Ribbon on Lid top (Champagne ribbon) */
 .lid-top::before, .lid-top::after {
   content: '';
   position: absolute;
-  background: #ffd166; /* gold cross ribbon */
+  background: #e3c48d; /* champagne ribbon */
   box-shadow: 0 0 4px rgba(0,0,0,0.15);
 }
 .lid-top::before {
@@ -333,7 +387,7 @@ body {
   left: 44px;
   width: 18px;
   height: 100%;
-  background: #ffd166;
+  background: #e3c48d;
 }
 
 /* === 3D Raised Ribbon Bow === */
@@ -351,7 +405,7 @@ body {
   position: absolute;
   width: 26px;
   height: 20px;
-  background: linear-gradient(135deg, #ffe08a, #e6b84d);
+  background: linear-gradient(135deg, #f0e1c2, #c9ab77); /* Champagne loops */
   border-radius: 50% 50% 20% 20%;
   box-shadow:
     0 3px 8px rgba(0,0,0,0.35),
@@ -372,7 +426,7 @@ body {
   position: absolute;
   width: 14px;
   height: 14px;
-  background: radial-gradient(circle, #ffe08a, #c9960a);
+  background: radial-gradient(circle, #f0e1c2, #bf9c5c); /* Champagne knot */
   border-radius: 50%;
   top: 8px;
   left: 50%;
@@ -387,7 +441,7 @@ body {
   position: absolute;
   width: 8px;
   height: 18px;
-  background: linear-gradient(180deg, #ffe08a, #c9960a);
+  background: linear-gradient(180deg, #f0e1c2, #bf9c5c); /* Champagne tails */
   border-radius: 0 0 4px 4px;
   top: 18px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.3);
@@ -402,17 +456,66 @@ body {
 }
 
 /* Open Animation trigger states */
+.gift-box-scene.open {
+  animation: none;
+}
+
 .gift-box-scene.open .box-lid {
-  transform: translateY(-160px) rotateX(-45deg) rotateY(60deg) scale(0.8);
-  opacity: 0;
-  transition: transform 1.2s cubic-bezier(0.25, 1, 0.3, 1), opacity 1.0s ease;
+  transform: translateY(-100px) rotateX(-20deg);
+  opacity: 1;
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.3, 1);
 }
 
 .gift-box-scene.open .box-body {
-  transform: translateY(80px) rotateX(15deg) scale(0.75);
-  opacity: 0;
-  transition: transform 1.2s cubic-bezier(0.25, 1, 0.3, 1), opacity 1.0s ease;
+  opacity: 1;
 }
+
+/* Hide subtitle & button when box opens */
+.gift-box-scene.open ~ .cover-sub {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Smooth transition out: box scales up and fades before page switch */
+.gift-box-scene.transitioning {
+  transform: scale(1.15);
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease;
+}
+
+/* === Surprise Image from Box === */
+.box-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0) scale(0.2);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s,
+              opacity 0.4s ease 0.3s;
+}
+
+.gift-box-scene.open .box-message {
+  opacity: 1;
+  transform: translate(-50%, -200px) scale(1);
+}
+
+.box-message.fade-out {
+  opacity: 0 !important;
+  transition: opacity 0.5s ease !important;
+}
+
+.box-msg-img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  border: 3px solid rgba(255, 255, 255, 0.6);
+}
+
+
 
 #btn-open {
   animation: softGlow 2s ease-in-out infinite alternate;
@@ -509,43 +612,38 @@ body {
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
   opacity: 0;
   cursor: pointer;
-  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.15), opacity 0.6s ease;
+  transition: transform 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.15),
+              opacity 0.65s ease;
   user-select: none;
 }
 
 /* Staggered entrance initial offsets */
 .photo-card.pc-1 {
   transform: translate(-8px, 28px) rotate(-4deg) scale(0.9);
-  transition-delay: 0.2s;
 }
 .photo-card.pc-2 {
   transform: translate(8px, 36px) rotate(3deg) scale(0.9);
-  transition-delay: 0.6s;
 }
 .photo-card.pc-3 {
   transform: translate(-4px, 46px) rotate(-2deg) scale(0.9);
-  transition-delay: 1.0s;
 }
 
-/* Shown states - transitions delay is cleared for instant interactivity */
+/* Shown states — no extra delay so interaction is instant */
 .photo-card.show.state-top {
   opacity: 1;
   transform: translate(-8px, -12px) rotate(-4deg) scale(1);
-  transition-delay: 0s !important;
   z-index: 3;
 }
 
 .photo-card.show.state-mid {
   opacity: 1;
   transform: translate(8px, -4px) rotate(3deg) scale(1);
-  transition-delay: 0s !important;
   z-index: 2;
 }
 
 .photo-card.show.state-bot {
   opacity: 1;
   transform: translate(-4px, 6px) rotate(-2deg) scale(1);
-  transition-delay: 0s !important;
   z-index: 1;
 }
 
@@ -647,6 +745,7 @@ body {
   background-color: rgba(15, 4, 8, 0.96); /* darker burgundy black backdrop */
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  will-change: opacity;
 }
 
 .lightbox-content {
@@ -945,7 +1044,7 @@ body {
 .loader-wrap {
   position: fixed;
   inset: 0;
-  background: transparent;
+  background: linear-gradient(180deg, #3d0d1c 0%, #471323 50%, #2b0812 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1002,6 +1101,7 @@ body {
   background: rgba(61, 13, 28, 0.6); /* wine red tint */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  will-change: transform, opacity;
   border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 8px 14px 8px 8px;
   border-radius: 50px;
@@ -1121,8 +1221,8 @@ body {
 }
 
 @keyframes flicker {
-  0% { transform: scale(1) rotate(-3deg); fill: #ffb703; filter: drop-shadow(0 0 4px #ffb703); }
-  100% { transform: scale(1.15) rotate(3deg); fill: #fb8500; filter: drop-shadow(0 0 10px #fb8500); }
+  0%   { transform: scale(1) rotate(-3deg); fill: #ffb703; }
+  100% { transform: scale(1.15) rotate(3deg); fill: #fb8500; }
 }
 
 .flame.extinguished {
@@ -1208,4 +1308,68 @@ body {
     width: 12px;
     height: 12px;
   }
+
+  /* === MOBILE PERFORMANCE: Reduce heavy animations === */
+  /* Disable expensive filter and reduce animation complexity */
+  .bouquet-letter-click {
+    animation: none;
+    filter: drop-shadow(0 0 6px rgba(255, 209, 102, 0.6));
+  }
+  .loader-flower {
+    animation-duration: 3s;
+  }
+  /* Reduce backdrop blur to save GPU */
+  .lightbox-modal {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .music-player-wrap {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  /* Disable float animation on gift box for performance */
+  .gift-box-scene {
+    animation: none;
+  }
+  /* Reduce photo flower animation */
+  .photo-flower {
+    animation: none;
+  }
+}
+
+/* === Animated Bouquet Letter === */
+.bouquet-letter-click {
+  transform-origin: center;
+}
+.bouquet-letter-click .env-flap {
+  transform-origin: 36px 0px;
+  transition: transform 0.4s ease-in-out;
+}
+.bouquet-letter-click .env-paper {
+  transition: transform 0.5s ease-in-out 0.25s; /* delay paper sliding up until flap is open */
+}
+.bouquet-letter-click .env-seal,
+.bouquet-letter-click .env-text {
+  transition: opacity 0.3s ease;
+}
+
+.bouquet-letter-click.opened .env-flap {
+  transform: scaleY(-1);
+}
+.bouquet-letter-click.opened .env-paper {
+  transform: translateY(-25px);
+}
+.bouquet-letter-click.opened .env-seal,
+.bouquet-letter-click.opened .env-text {
+  opacity: 0;
+}
+.photo-card.pc-4 {
+  transform: translate(12px, 32px) rotate(4deg) scale(0.9);
+}
+.photo-card.pc-5 {
+  transform: translate(-10px, 42px) rotate(-3deg) scale(0.9);
+}
+.photo-card.show.state-hidden {
+  opacity: 0;
+  z-index: 0;
 }
