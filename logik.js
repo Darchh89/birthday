@@ -19,7 +19,7 @@ const CONFIG = {
     },
     {
       tanya: "Apa minuman favorit aku? 🍵",
-      opsi: ["Mochachino", "Americano ", "Es teh"],
+      opsi: ["Matcha", "Kopi", "Es teh"],
       jawaban: 1 // Semua yang gratisan
     },
     {
@@ -28,13 +28,13 @@ const CONFIG = {
       jawaban: 2 // Setiap hari kan sayang terus
     },
     {
-      tanya: "Tempat favorit pertama kita jalan? 🚶‍♀️",
+      tanya: "Tempat pertama kita jalan? 🚶‍♀️",
       opsi: ["Emmm apaa yaa", "Malangg", "Batuu"],
       jawaban: 2 // Di hatimu aja deh
     },
     {
       tanya: "Panggilan sayang kamu buat aku? 🤭",
-      opsi: ["Beb 🦆", "Darling", "Milopp ❤️"],
+      opsi: ["Bluu", "Milopp", "Semuaaa benarrr"],
       jawaban: 2 // Sayangku
     }
   ],
@@ -42,7 +42,7 @@ const CONFIG = {
   // Isi surat — tulis sesuka hati kamu
   surat: `My dearest Dara... 💕
 
-Sayang, selamat ulang tahun ya! 🤍 Di hari spesial ini, aku cuma mau bilang betapa bersyukurnya aku bisa kenal dan punya kamu di hidupku. Makasih ya udah selalu ada, selalu sabar ngadepin kelemotan aku, dan selalu makasih udah bikin hari-hariku jauh lebih berwarna. Kamu harus tau kalau kamu tuh orang yang paling berarti buat aku sekarang. Semoga di umur yang baru ini, semua mimpi kamu pelan-pelan tercapai, sehat selalu, dan makin bahagia. Kurang-kurangin OVT-nya yaa, kan juga udah aku sepenuhnya milik kamu. Aku sayang banget sama kamu`,
+Sayang, selamat ulang tahun ya! 🤍 Di hari spesial ini, aku cuma mau bilang betapa bersyukurnya aku bisa kenal dan punya kamu di hidupku. Makasih ya udah selalu ada, selalu sabar ngadepin kelemotan aku, dan makasih udah bikin hari-hariku jauh lebih berwarna. Kamu tuh orang yang paling berarti buat aku sekarang. Semoga di umur yang baru ini, semua mimpi kamu pelan-pelan tercapai, sehat selalu, dan makin bahagia. Kurang-kurangin OVT-nya yaa, hal yang kamu takutkan ga akan terjad tenang aja, kan juga udah aku sepenuhnya milik kamu. Aku sayang banget sama kamu 💕`,
 
   // Pesan akhir di halaman terakhir
   pesanAkhir: `Semoga di umur yang bertambah ini, kamu makin bahagia, sehat selalu, dan semua doamu terkabul. Makasih udah jadi bagian terindah di hidupku. Btw masih ada kejutan lagi loh tapi nanti pas kita ketemu yaaa. I love you! 💕`
