@@ -24,7 +24,7 @@ const CONFIG = {
     },
     {
       tanya: "Tanggal berapa aku mulai intens deketinn kamu? 📅",
-      opsi: ["3 November", "1 Oktober", "Ga tau lupa 😅"],
+      opsi: ["Ga tau lupa 😅", "1 Oktober", "3 November"],
       jawaban: 2 // Setiap hari kan sayang terus
     },
     {
@@ -681,19 +681,21 @@ cards.forEach(card => {
 
     // After swipe out finishes, recycle this card back into the deck
     setTimeout(() => {
-      card.classList.remove('swipe');
-      card.style.transitionDelay = ''; // clean up inline style
+      requestAnimationFrame(() => {
+        card.classList.remove('swipe');
+        card.style.transitionDelay = ''; // clean up inline style
 
-      const totalCards = document.querySelectorAll('.photo-card').length;
-      if (totalCards > 3) {
-        card.classList.add('state-hidden');
-      } else {
-        card.classList.add('state-bot');
-      }
+        const totalCards = document.querySelectorAll('.photo-card').length;
+        if (totalCards > 3) {
+          card.classList.add('state-hidden');
+        } else {
+          card.classList.add('state-bot');
+        }
 
-      // Move to end of DOM so next query gets the right first hidden card
-      card.parentNode.appendChild(card);
-    }, 450);
+        // Move to end of DOM so next query gets the right first hidden card
+        card.parentNode.appendChild(card);
+      });
+    }, 350);
   });
 
   // 2. Click on the Zoom Button to Inspect the Photo
