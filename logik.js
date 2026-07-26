@@ -596,37 +596,41 @@ function showKuisResult() {
 }
 
 // --- Loading Screen Handler ---
-let isPageLoaded = false;
-window.addEventListener('load', () => {
-  isPageLoaded = true;
-});
+function dismissLoader() {
+  const loader = document.getElementById('loader');
+  if (!loader || loader.dataset.dismissed) return;
+  loader.dataset.dismissed = 'true';
 
-setTimeout(() => {
-  const checkInterval = setInterval(() => {
-    if (isPageLoaded || document.readyState === 'complete') {
-      const loader = document.getElementById('loader');
-      if (loader) {
-        loader.classList.add('fade-out');
+  loader.classList.add('fade-out');
 
-        // Show Cover page (Stage 1)
-        pages.cover.classList.add('active');
+  // Show Cover page (Stage 1)
+  pages.cover.classList.add('active');
 
-        // Force reflow/reset of cover-content animations
-        const coverInner = pages.cover.querySelector('.cover-content');
-        if (coverInner) {
-          coverInner.style.animation = 'none';
-          coverInner.offsetHeight; // force reflow
-          coverInner.style.animation = '';
-        }
+  // Force reflow/reset of cover-content animations
+  const coverInner = pages.cover.querySelector('.cover-content');
+  if (coverInner) {
+    coverInner.style.animation = 'none';
+    coverInner.offsetHeight; // force reflow
+    coverInner.style.animation = '';
+  }
 
-        clearInterval(checkInterval);
-        setTimeout(() => {
-          loader.style.display = 'none';
-        }, 800);
-      }
-    }
-  }, 100);
-}, 2500);
+  setTimeout(() => {
+    loader.style.display = 'none';
+  }, 800);
+}
+
+// Dismiss loader once DOM is interactive (don't wait for heavy assets like audio)
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  // DOM already ready, just wait the minimum display time
+  setTimeout(dismissLoader, 2500);
+} else {
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(dismissLoader, 2500);
+  });
+}
+
+// Failsafe: always dismiss loader after 6 seconds no matter what
+setTimeout(dismissLoader, 6000);
 
 // --- Polaroid Stack Interactive Cycling ---
 const cards = document.querySelectorAll('.photo-card');

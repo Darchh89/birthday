@@ -18,12 +18,24 @@
   <!-- LOADER SCREEN -->
   <div id="loader" class="loader-wrap">
     <div class="loader-content">
-      <div class="loader-flower">🌸</div>
+      <div class="loader-flower">
+        <svg viewBox="0 0 100 100" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(50,50)">
+            <ellipse cx="0" cy="-20" rx="12" ry="20" fill="#f8a4b8" opacity="0.9"/>
+            <ellipse cx="0" cy="-20" rx="12" ry="20" fill="#f8a4b8" opacity="0.9" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-20" rx="12" ry="20" fill="#f8a4b8" opacity="0.9" transform="rotate(144)"/>
+            <ellipse cx="0" cy="-20" rx="12" ry="20" fill="#f8a4b8" opacity="0.9" transform="rotate(216)"/>
+            <ellipse cx="0" cy="-20" rx="12" ry="20" fill="#f8a4b8" opacity="0.9" transform="rotate(288)"/>
+            <circle cx="0" cy="0" r="10" fill="#f0e0e8"/>
+            <circle cx="0" cy="0" r="5" fill="#e8c0d0"/>
+          </g>
+        </svg>
+      </div>
       <p class="loader-text">preparing something special for you...</p>
     </div>
   </div>
 
-  <audio id="bg-music" loop preload="auto">
+  <audio id="bg-music" loop preload="none">
     <source src="assets/audio/love.mp3" type="audio/mpeg">
   </audio>
 
