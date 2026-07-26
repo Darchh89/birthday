@@ -1345,9 +1345,13 @@ body {
 .bouquet-letter-click {
   transform-origin: center;
 }
-.bouquet-letter-click .env-flap {
+.bouquet-letter-click .env-flap,
+.bouquet-letter-click .env-flap-back {
   transform-origin: 36px 0px;
-  transition: transform 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out, opacity 0s 0.2s;
+}
+.bouquet-letter-click .env-flap-back {
+  opacity: 0;
 }
 .bouquet-letter-click .env-paper {
   transition: transform 0.5s ease-in-out 0.25s; /* delay paper sliding up until flap is open */
@@ -1359,6 +1363,11 @@ body {
 
 .bouquet-letter-click.opened .env-flap {
   transform: scaleY(-1);
+  opacity: 0;
+}
+.bouquet-letter-click.opened .env-flap-back {
+  transform: scaleY(-1);
+  opacity: 1;
 }
 .bouquet-letter-click.opened .env-paper {
   transform: translateY(-25px);
