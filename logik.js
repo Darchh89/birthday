@@ -119,14 +119,14 @@ class Heart {
     this.x = Math.random() * canvas.width;
     this.y = canvas.height + 20;
     this.size = Math.random() * 10 + 5;
-    this.speed = Math.random() * 0.8 + 0.3;
+    this.speed = Math.random() * 0.4 + 0.15; // Halved for 60fps
     this.opacity = Math.random() * 0.25 + 0.05;
-    this.drift = Math.random() * 0.4 - 0.2;
+    this.drift = Math.random() * 0.2 - 0.1; // Halved for 60fps
     this.wave = Math.random() * Math.PI * 2;
   }
   update() {
     this.y -= this.speed;
-    this.wave += 0.02;
+    this.wave += 0.01; // Halved for 60fps
     this.x += Math.sin(this.wave) * 0.3 + this.drift;
     if (this.y < -20) this.reset();
   }
@@ -166,9 +166,6 @@ function animateCanvas(timestamp) {
   // Pause rendering when tab is hidden (saves battery)
   if (!isPageVisible) return;
 
-  if (timestamp - lastFrame < frameInterval) return;
-  lastFrame = timestamp;
-
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   // 1. Draw background hearts
@@ -184,7 +181,7 @@ function animateCanvas(timestamp) {
       c.x += c.vx;
       c.y += c.vy;
       c.vx *= 0.98;
-      c.opacity -= 0.015;
+      c.opacity -= 0.008; // Slower fade for 60fps
 
       ctx.save();
       ctx.globalAlpha = Math.max(0, c.opacity);

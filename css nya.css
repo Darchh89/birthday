@@ -1319,6 +1319,10 @@ body {
     animation: none;
     filter: drop-shadow(0 0 6px rgba(255, 209, 102, 0.6));
   }
+  .bouquet-hint {
+    animation: none;
+    opacity: 0.9;
+  }
   .loader-flower {
     animation-duration: 3s;
   }
