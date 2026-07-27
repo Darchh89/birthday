@@ -321,32 +321,39 @@ document.getElementById('btn-next1').addEventListener('click', () => {
 });
 
 // --- STAGE 7: Bouquet Letter Click → Letter ---
-document.getElementById('bouquet-letter').addEventListener('click', () => {
-  const letter = document.getElementById('bouquet-letter');
+const bouquetLetter = document.getElementById('bouquet-letter');
+if (bouquetLetter) {
+  const openBouquetLetter = (e) => {
+    if (e.type === 'touchstart') e.preventDefault();
+    if (bouquetLetter.classList.contains('opened')) return; // prevent double trigger
 
-  // Disable multiple clicks
-  letter.style.pointerEvents = 'none';
+    // Disable multiple clicks
+    bouquetLetter.style.pointerEvents = 'none';
 
-  // Add opened class to trigger CSS animation
-  letter.classList.add('opened');
+    // Add opened class to trigger CSS animation
+    bouquetLetter.classList.add('opened');
 
-  // Play a quick pop animation for the whole envelope
-  letter.style.transition = 'transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-  letter.style.transform = 'scale(1.15)';
-  setTimeout(() => { letter.style.transform = 'scale(1)'; }, 200);
+    // Play a quick pop animation for the whole envelope
+    bouquetLetter.style.transition = 'transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+    bouquetLetter.style.transform = 'scale(1.15)';
+    setTimeout(() => { bouquetLetter.style.transform = 'scale(1)'; }, 200);
 
-  // Wait for the envelope opening animation to finish before page transition
-  setTimeout(() => {
-    goTo(pages.bouquet, pages.letter);
-    // start typing letter
-    const letterEl = document.getElementById('typed-letter');
-    const cursorEl = document.getElementById('cursor');
-    typeText(letterEl, CONFIG.surat, 35, () => {
-      cursorEl.style.display = 'none';
-      document.getElementById('btn-next2').classList.add('show');
-    });
-  }, 1000);
-});
+    // Wait for the envelope opening animation to finish before page transition
+    setTimeout(() => {
+      goTo(pages.bouquet, pages.letter);
+      // start typing letter
+      const letterEl = document.getElementById('typed-letter');
+      const cursorEl = document.getElementById('cursor');
+      typeText(letterEl, CONFIG.surat, 35, () => {
+        cursorEl.style.display = 'none';
+        document.getElementById('btn-next2').classList.add('show');
+      });
+    }, 1000);
+  };
+
+  bouquetLetter.addEventListener('click', openBouquetLetter);
+  bouquetLetter.addEventListener('touchstart', openBouquetLetter, { passive: false });
+}
 
 // --- STAGE 3: Letter → Memories ---
 document.getElementById('btn-next2').addEventListener('click', () => {

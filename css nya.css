@@ -1343,7 +1343,7 @@ body {
 
 /* === Animated Bouquet Letter === */
 .bouquet-letter-click {
-  transform-origin: center;
+  /* removed transform-origin: center due to iOS Safari bug */
 }
 .bouquet-letter-click .env-flap,
 .bouquet-letter-click .env-flap-back {
