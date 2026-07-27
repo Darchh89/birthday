@@ -102,6 +102,7 @@ function goTo(from, to) {
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 let hearts = [];
+let confetti = [];
 
 function resize() {
   canvas.width = window.innerWidth;
@@ -203,7 +204,6 @@ function animateCanvas(timestamp) {
 animateCanvas(0);
 
 // --- Confetti Burst ---
-let confetti = [];
 function burstConfetti(cx, cy, count) {
   const colors = ['#f0a0b0', '#ffd6e0', '#fff', '#ffb3c6', '#c9184a'];
   const actualCount = isMobile ? Math.floor(count * 0.6) : count;
