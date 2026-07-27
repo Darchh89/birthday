@@ -1347,7 +1347,10 @@ body {
 }
 .bouquet-letter-click .env-flap,
 .bouquet-letter-click .env-flap-back {
-  transform-origin: 36px 0px;
+  transform-origin: 50% 0%;
+  transform-box: fill-box;
+  -webkit-transform-origin: 50% 0%;
+  -webkit-transform-box: fill-box;
   transition: transform 0.4s ease-in-out, opacity 0s 0.2s;
 }
 .bouquet-letter-click .env-flap-back {
